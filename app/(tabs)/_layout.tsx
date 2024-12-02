@@ -20,36 +20,51 @@ export default function TabLayout() {
         tabBarStyle: Platform.select({
           ios: {
             position: "absolute",
+            backgroundColor: "#C4C4C4",
+            opacity: 1,
           },
-          default: {},
+          default: {
+            backgroundColor: "#C4C4C4",
+            opacity: 1,
+          },
         }),
+        tabBarLabelStyle: {
+          fontSize: 10,
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "TODAY",
           tabBarIcon: () => null,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="reflection"
         options={{
-          title: "Explore",
+          title: "REFLECTION",
           tabBarIcon: () => null,
         }}
       />
       <Tabs.Screen
-        name="game"
+        name="play"
         options={{
-          title: "Game",
+          title: "PLAY",
           tabBarIcon: () => null,
         }}
       />
       <Tabs.Screen
-        name="newTab"
+        name="about"
         options={{
-          title: "New Tab",
+          title: "ABOUT",
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: "ACCOUNT",
           tabBarIcon: () => null,
         }}
       />
