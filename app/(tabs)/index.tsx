@@ -8,6 +8,7 @@ import { ThemedText } from "@/components/ThemedText";
 export default function HomeScreen() {
   const [pressedStates, setPressedStates] = useState(Array(48).fill(false));
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [sliceColors, setSliceColors] = useState<string[]>(Array(48).fill("transparent"));
 
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
@@ -15,6 +16,13 @@ export default function HomeScreen() {
       newStates[index] = !newStates[index];
       return newStates;
     });
+
+    setSliceColors((prevColors) => {
+      const newColors = [...prevColors];
+      newColors[index] = selectedColor || "#E9942F";
+      return newColors;
+    });
+
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
   };
 
@@ -114,7 +122,7 @@ export default function HomeScreen() {
                   justifyContent: "flex-end",
                   alignItems: "center",
                   paddingVertical: 0,
-                  backgroundColor: isPressed ? selectedColor || "#E9942F" : "transparent",
+                  backgroundColor: sliceColors[index],
                 }}
               >
                 <ThemedText
