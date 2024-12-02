@@ -1,5 +1,7 @@
-import { SafeAreaView, View, ScrollView } from "react-native";
+import { SafeAreaView, View, ScrollView, TouchableOpacity } from "react-native";
 import { Svg, Rect, Circle, Line } from "react-native-svg";
+import { useState } from "react";
+import * as Haptics from 'expo-haptics';
 
 import { ThemedText } from "@/components/ThemedText";
 
@@ -71,9 +73,17 @@ export default function HomeScreen() {
             const hours = String(Math.floor(index / 2)).padStart(2, "0");
             const minutes = index % 2 === 0 ? "00" : "30";
             const timeLabel = `${hours}:${minutes}`;
+            const [isPressed, setIsPressed] = useState(false);
+
+            const handlePress = () => {
+              setIsPressed(!isPressed);
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            };
+
             return (
-              <View
+              <TouchableOpacity
                 key={index}
+                onPress={handlePress}
                 style={{
                   width: 40,
                   height: "100%",
@@ -83,6 +93,7 @@ export default function HomeScreen() {
                   justifyContent: "flex-end",
                   alignItems: "center",
                   paddingVertical: 10,
+                  backgroundColor: isPressed ? "#E9942F" : "transparent",
                 }}
               >
                 <ThemedText
@@ -96,7 +107,7 @@ export default function HomeScreen() {
                 >
                   {timeLabel}
                 </ThemedText>
-              </View>
+              </TouchableOpacity>
             );
           })}
         </ScrollView>
