@@ -8,7 +8,9 @@ import { ThemedText } from "@/components/ThemedText";
 export default function HomeScreen() {
   const [pressedStates, setPressedStates] = useState(Array(48).fill(false));
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const [sliceColors, setSliceColors] = useState<string[]>(Array(48).fill("transparent"));
+  const [sliceColors, setSliceColors] = useState<string[]>(
+    Array(48).fill("transparent"),
+  );
 
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
@@ -28,6 +30,18 @@ export default function HomeScreen() {
 
   const handleColorPress = (color: string) => {
     setSelectedColor(color);
+  };
+
+  const colorLabels = {
+    work: "#141F2C",
+    sports: "#024886",
+    study: "#6D7D8D",
+    family: "#B4C5D6",
+    food: "#E9942F",
+    friends: "#9D8266",
+    grocery: "#A5A1A0",
+    rest: "#DAEBFD",
+    clear: "transparent",
   };
 
   return (
@@ -59,6 +73,23 @@ export default function HomeScreen() {
           <Circle cx="7" cy="7" r="1.5" stroke="black" />
           <Circle cx="15" cy="7" r="1.5" stroke="black" />
           <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
+        </Svg>
+        <Svg
+          width="14"
+          height="17"
+          viewBox="0 0 14 17"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            position: "absolute",
+            top: 54,
+            right: 20,
+          }}
+        >
+          <Rect x="0.5" y="0.5" width="13.0076" height="16" stroke="black" />
+          <Line x1="2.35742" y1="4.39453" x2="11.7883" y2="4.39453" stroke="black" />
+          <Line x1="2.35742" y1="8.77344" x2="11.7883" y2="8.77344" stroke="black" />
+          <Line x1="2.35742" y1="12.8945" x2="11.7883" y2="12.8945" stroke="black" />
         </Svg>
         <ThemedText
           style={{
@@ -119,7 +150,7 @@ export default function HomeScreen() {
                   borderWidth: 1,
                   borderColor: "#6646EC",
                   marginHorizontal: 2,
-                  justifyContent: "flex-end",
+                  justifyContent: "space-between",
                   alignItems: "center",
                   paddingVertical: 0,
                   backgroundColor: sliceColors[index],
@@ -136,6 +167,24 @@ export default function HomeScreen() {
                 >
                   {timeLabel}
                 </ThemedText>
+                {index % 6 === 0 && (
+                  <Svg
+                    width="14"
+                    height="17"
+                    viewBox="0 0 14 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{
+                      position: "absolute",
+                      bottom: 10,
+                    }}
+                  >
+                    <Rect x="0.5" y="0.5" width="13.0076" height="16" stroke="black" />
+                    <Line x1="2.35742" y1="4.39453" x2="11.7883" y2="4.39453" stroke="black" />
+                    <Line x1="2.35742" y1="8.77344" x2="11.7883" y2="8.77344" stroke="black" />
+                    <Line x1="2.35742" y1="12.8945" x2="11.7883" y2="12.8945" stroke="black" />
+                  </Svg>
+                )}
               </TouchableOpacity>
             );
           })}
@@ -176,24 +225,38 @@ export default function HomeScreen() {
             marginTop: 10,
           }}
         >
-          {["#141F2C", "#024886", "#6D7D8D", "#B4C5D6", "#E9942F", "#9D8266", "#A5A1A0", "#DAEBFD"].map((color, index) => (
-            <TouchableOpacity
+          {Object.entries(colorLabels).map(([label, color], index) => (
+            <View
               key={index}
-              onPress={() => handleColorPress(color)}
               style={{
-                width: 60,
-                height: 32,
-                borderWidth: 1,
-                borderColor: "#A1A1A1",
-                justifyContent: "center",
                 alignItems: "center",
                 marginRight: 10,
-                marginBottom: 10,
-                backgroundColor: color,
               }}
             >
-              {/* Remove plus sign from these boxes */}
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handleColorPress(color)}
+                style={{
+                  width: 60,
+                  height: 32,
+                  borderWidth: 1,
+                  borderColor: "#A1A1A1",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: color,
+                }}
+              />
+              <ThemedText
+                style={{
+                  fontSize: 7,
+                  color: "black",
+                  textAlign: "left",
+                  width: 60,
+                  marginLeft: 0,
+                }}
+              >
+                {label}
+              </ThemedText>
+            </View>
           ))}
           <View
             style={{
