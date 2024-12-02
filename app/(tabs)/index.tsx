@@ -1,11 +1,27 @@
 import { SafeAreaView, View, ScrollView, TouchableOpacity } from "react-native";
 import { Svg, Rect, Circle, Line } from "react-native-svg";
 import { useState } from "react";
-import * as Haptics from 'expo-haptics';
+import * as Haptics from "expo-haptics";
 
 import { ThemedText } from "@/components/ThemedText";
 
 export default function HomeScreen() {
+  const [pressedStates, setPressedStates] = useState(Array(48).fill(false));
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
+  const handlePress = (index: number) => {
+    setPressedStates((prevStates) => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+  };
+
+  const handleColorPress = (color: string) => {
+    setSelectedColor(color);
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#B7B7B7" }}>
       {/* First Box - 20% height */}
@@ -17,7 +33,7 @@ export default function HomeScreen() {
           justifyContent: "center",
           alignItems: "flex-start",
           paddingLeft: 20,
-          position: 'relative',
+          position: "relative",
         }}
       >
         <Svg
@@ -25,9 +41,8 @@ export default function HomeScreen() {
           height="15"
           viewBox="0 0 22 15"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             right: 20,
           }}
@@ -42,12 +57,18 @@ export default function HomeScreen() {
             fontSize: 10,
             color: "black",
             textDecorationLine: "underline",
+            marginBottom: 2,
           }}
         >
           Today
         </ThemedText>
         <ThemedText
-          style={{ fontSize: 10, color: "black", textTransform: "uppercase" }}
+          style={{
+            fontSize: 10,
+            color: "black",
+            textTransform: "uppercase",
+            marginBottom: 2,
+          }}
         >
           Wednesday, 27/11/2024
         </ThemedText>
@@ -67,23 +88,23 @@ export default function HomeScreen() {
       >
         <ScrollView
           horizontal
-          contentContainerStyle={{ flexDirection: "row", paddingVertical: 20 }}
+          contentContainerStyle={{
+            flexDirection: "row",
+            paddingVertical: 20,
+            paddingHorizontal: 10,
+          }}
         >
           {Array.from({ length: 48 }).map((_, index) => {
             const hours = String(Math.floor(index / 2)).padStart(2, "0");
             const minutes = index % 2 === 0 ? "00" : "30";
             const timeLabel = `${hours}:${minutes}`;
-            const [isPressed, setIsPressed] = useState(false);
-
-            const handlePress = () => {
-              setIsPressed(!isPressed);
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-            };
+            const isPressed = pressedStates[index];
 
             return (
               <TouchableOpacity
                 key={index}
-                onPress={handlePress}
+                onPress={() => handlePress(index)}
+                activeOpacity={1}
                 style={{
                   width: 40,
                   height: "100%",
@@ -92,17 +113,17 @@ export default function HomeScreen() {
                   marginHorizontal: 2,
                   justifyContent: "flex-end",
                   alignItems: "center",
-                  paddingVertical: 10,
-                  backgroundColor: isPressed ? "#E9942F" : "transparent",
+                  paddingVertical: 0,
+                  backgroundColor: isPressed ? selectedColor || "#E9942F" : "transparent",
                 }}
               >
                 <ThemedText
                   style={{
-                    width: 50,
+                    width: 40,
                     fontSize: 8,
                     color: "black",
-                    transform: [{ rotate: "-90deg" }],
-                    marginBottom: 10,
+                    marginBottom: 0,
+                    textAlign: "center",
                   }}
                 >
                   {timeLabel}
@@ -113,13 +134,74 @@ export default function HomeScreen() {
         </ScrollView>
       </View>
       {/* Third Box - 20% height */}
-      <View style={{ width: "95%", height: "24%", backgroundColor: "#C4C4C4", marginVertical: 10, alignItems: 'flex-start', paddingLeft: 10, borderRadius: 5, alignSelf: 'center' }}>
-        <View style={{ flexDirection: 'row', marginTop: 12 }}>
-          <ThemedText style={{ fontSize: 12, color: 'black' }}>Activities</ThemedText>
-          <ThemedText style={{ fontSize: 10, color: 'black', textDecorationLine: 'underline', marginLeft: 20 }}>Edit</ThemedText>
+      <View
+        style={{
+          width: "95%",
+          height: "24%",
+          backgroundColor: "#C4C4C4",
+          marginVertical: 10,
+          alignItems: "flex-start",
+          paddingLeft: 10,
+          borderRadius: 5,
+          alignSelf: "center",
+        }}
+      >
+        <View style={{ flexDirection: "row", marginTop: 12 }}>
+          <ThemedText style={{ fontSize: 12, color: "black" }}>
+            Activities
+          </ThemedText>
+          <ThemedText
+            style={{
+              fontSize: 10,
+              color: "black",
+              textDecorationLine: "underline",
+              marginLeft: 20,
+            }}
+          >
+            Edit
+          </ThemedText>
         </View>
-        <View style={{ width: 60, height: 32, borderWidth: 1, borderColor: '#A1A1A1', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-          <ThemedText style={{ fontSize: 16, color: 'black' }}>+</ThemedText>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            marginTop: 10,
+          }}
+        >
+          {["#141F2C", "#024886", "#6D7D8D", "#B4C5D6", "#E9942F", "#9D8266", "#A5A1A0", "#DAEBFD"].map((color, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => handleColorPress(color)}
+              style={{
+                width: 60,
+                height: 32,
+                borderWidth: 1,
+                borderColor: "#A1A1A1",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 10,
+                marginBottom: 10,
+                backgroundColor: color,
+              }}
+            >
+              {/* Remove plus sign from these boxes */}
+            </TouchableOpacity>
+          ))}
+          <View
+            style={{
+              width: 60,
+              height: 32,
+              borderWidth: 1,
+              borderColor: "#A1A1A1",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: 10,
+              marginBottom: 10,
+              backgroundColor: "transparent",
+            }}
+          >
+            <ThemedText style={{ fontSize: 16, color: "black" }}>+</ThemedText>
+          </View>
         </View>
       </View>
     </SafeAreaView>

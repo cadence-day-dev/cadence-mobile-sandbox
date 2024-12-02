@@ -13,23 +13,27 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: "black",
+        tabBarInactiveTintColor: "#585858",
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
             position: "absolute",
-            backgroundColor: "#C4C4C4",
-            opacity: 1,
+            backgroundColor: "white",
+            borderTopWidth: 1,
+            borderTopColor: "#ADADAD",
           },
           default: {
-            backgroundColor: "#C4C4C4",
+            backgroundColor: "white",
             opacity: 1,
+            borderTopWidth: 2,
+            borderTopColor: "red",
           },
         }),
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 11,
         },
       }}
     >
@@ -54,13 +58,13 @@ export default function TabLayout() {
           tabBarIcon: () => null,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="about"
         options={{
           title: "ABOUT",
           tabBarIcon: () => null,
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="account"
         options={{

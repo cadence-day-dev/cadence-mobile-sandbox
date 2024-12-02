@@ -6,11 +6,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function BlurTabBarBackground() {
   return (
     <BlurView
-      // System chrome material automatically adapts to the system's theme
-      // and matches the native tab bar appearance on iOS.
-      tint="systemChromeMaterial"
-      intensity={100}
-      style={StyleSheet.absoluteFill}
+      tint="light" // Light tint for a white appearance
+      intensity={0} // Adjust intensity for the blur effect
+      style={[
+        StyleSheet.absoluteFill,
+        { backgroundColor: "rgba(183, 183, 183, 4)" },
+      ]}
     />
   );
 }
