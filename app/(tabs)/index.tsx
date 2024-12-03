@@ -74,23 +74,6 @@ export default function HomeScreen() {
           <Circle cx="15" cy="7" r="1.5" stroke="black" />
           <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
         </Svg>
-        <Svg
-          width="14"
-          height="17"
-          viewBox="0 0 14 17"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{
-            position: "absolute",
-            top: 54,
-            right: 20,
-          }}
-        >
-          <Rect x="0.5" y="0.5" width="13.0076" height="16" stroke="black" />
-          <Line x1="2.35742" y1="4.39453" x2="11.7883" y2="4.39453" stroke="black" />
-          <Line x1="2.35742" y1="8.77344" x2="11.7883" y2="8.77344" stroke="black" />
-          <Line x1="2.35742" y1="12.8945" x2="11.7883" y2="12.8945" stroke="black" />
-        </Svg>
         <ThemedText
           style={{
             fontSize: 14,
@@ -173,16 +156,39 @@ export default function HomeScreen() {
                     height="17"
                     viewBox="0 0 14 17"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                     style={{
                       position: "absolute",
                       bottom: 10,
                     }}
                   >
-                    <Rect x="0.5" y="0.5" width="13.0076" height="16" stroke="black" />
-                    <Line x1="2.35742" y1="4.39453" x2="11.7883" y2="4.39453" stroke="black" />
-                    <Line x1="2.35742" y1="8.77344" x2="11.7883" y2="8.77344" stroke="black" />
-                    <Line x1="2.35742" y1="12.8945" x2="11.7883" y2="12.8945" stroke="black" />
+                    <Rect
+                      x="0.5"
+                      y="0.5"
+                      width="13.0076"
+                      height="16"
+                      stroke="black"
+                    />
+                    <Line
+                      x1="2.35742"
+                      y1="4.39453"
+                      x2="11.7883"
+                      y2="4.39453"
+                      stroke="black"
+                    />
+                    <Line
+                      x1="2.35742"
+                      y1="8.77344"
+                      x2="11.7883"
+                      y2="8.77344"
+                      stroke="black"
+                    />
+                    <Line
+                      x1="2.35742"
+                      y1="12.8945"
+                      x2="11.7883"
+                      y2="12.8945"
+                      stroke="black"
+                    />
                   </Svg>
                 )}
               </TouchableOpacity>
