@@ -93,7 +93,7 @@ export default function HomeScreen() {
         </Svg>
         <ThemedText
           style={{
-            fontSize: 10,
+            fontSize: 14,
             color: "black",
             textDecorationLine: "underline",
             marginBottom: 2,
@@ -103,7 +103,7 @@ export default function HomeScreen() {
         </ThemedText>
         <ThemedText
           style={{
-            fontSize: 10,
+            fontSize: 14,
             color: "black",
             textTransform: "uppercase",
             marginBottom: 2,
@@ -111,18 +111,18 @@ export default function HomeScreen() {
         >
           Wednesday, 27/11/2024
         </ThemedText>
-        <ThemedText style={{ fontSize: 10, color: "black" }}>13:40</ThemedText>
+        <ThemedText style={{ fontSize: 14, color: "black" }}>13:40</ThemedText>
       </View>
       {/* Second Box - 50% height */}
       <View
         style={{
           width: "100%",
-          height: "50%",
+          height: "53%",
           backgroundColor: "#C4C4C4",
           marginVertical: 10,
           justifyContent: "center",
           alignItems: "center",
-          paddingVertical: 10,
+          paddingVertical: 0,
         }}
       >
         <ScrollView
@@ -145,7 +145,7 @@ export default function HomeScreen() {
                 onPress={() => handlePress(index)}
                 activeOpacity={1}
                 style={{
-                  width: 40,
+                  width: 50,
                   height: "100%",
                   borderWidth: 1,
                   borderColor: "#6646EC",
@@ -159,7 +159,7 @@ export default function HomeScreen() {
                 <ThemedText
                   style={{
                     width: 40,
-                    fontSize: 8,
+                    fontSize: 9,
                     color: "black",
                     marginTop: 10,
                     textAlign: "center",
@@ -196,7 +196,7 @@ export default function HomeScreen() {
           width: "95%",
           height: "24%",
           backgroundColor: "#C4C4C4",
-          marginVertical: 10,
+          marginVertical: 2,
           alignItems: "flex-start",
           paddingLeft: 10,
           borderRadius: 5,
@@ -204,7 +204,7 @@ export default function HomeScreen() {
         }}
       >
         <View style={{ flexDirection: "row", marginTop: 12 }}>
-          <ThemedText style={{ fontSize: 12, color: "black" }}>
+          <ThemedText style={{ fontSize: 15, color: "black" }}>
             Activities
           </ThemedText>
           <ThemedText
@@ -247,11 +247,14 @@ export default function HomeScreen() {
               />
               <ThemedText
                 style={{
-                  fontSize: 7,
+                  fontSize: 9,
                   color: "black",
                   textAlign: "left",
                   width: 60,
+                  marginTop: -2,
+                  marginBottom: 5,
                   marginLeft: 0,
+                  textTransform: "capitalize",
                 }}
               >
                 {label}
