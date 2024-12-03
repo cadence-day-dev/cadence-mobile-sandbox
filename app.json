@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "cadenceApp",
+    "owner": "analogfuture",
     "slug": "cadenceApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -36,6 +37,20 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9c996628-6e90-43f3-927e-a8587c23afc5"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9c996628-6e90-43f3-927e-a8587c23afc5"
     }
   }
 }

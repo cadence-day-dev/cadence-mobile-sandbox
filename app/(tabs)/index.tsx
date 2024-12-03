@@ -161,7 +161,7 @@ export default function HomeScreen() {
                     width: 40,
                     fontSize: 8,
                     color: "black",
-                    marginBottom: 0,
+                    marginTop: 10,
                     textAlign: "center",
                   }}
                 >

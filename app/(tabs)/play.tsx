@@ -18,7 +18,7 @@ const brickColors = [
   "#024886", // sports
   "#6D7D8D", // study
   "#B4C5D6", // family
-  "#E9942F", // food
+  "#E9942F", // food (yellow)
   "#9D8266", // friends
   "#A5A1A0", // grocery
   "#DAEBFD", // rest
@@ -33,12 +33,17 @@ const PlayScreen = () => {
 
   const initializeBricks = () => {
     return Array.from({ length: brickRowCount }, (_, row) =>
-      Array.from({ length: brickColumnCount }, (_, col) => ({
-        x: col * (brickWidth + brickGap),
-        y: row * (brickHeight + brickGap) + brickOffsetTop,
-        status: 1,
-        color: brickColors[Math.floor(Math.random() * brickColors.length)], // Randomly assign color
-      }))
+      Array.from({ length: brickColumnCount }, (_, col) => {
+        const color = brickColors[Math.floor(Math.random() * brickColors.length)];
+        const hitCount = color === "#E9942F" ? 2 : 1; // Yellow bricks require 2 hits
+        return {
+          x: col * (brickWidth + brickGap),
+          y: row * (brickHeight + brickGap) + brickOffsetTop,
+          status: 1,
+          color,
+          hitCount,
+        };
+      })
     );
   };
 
@@ -90,7 +95,11 @@ const PlayScreen = () => {
                 y < brick.y + brickHeight
               ) {
                 dy = -dy;
-                return { ...brick, status: 0 };
+                if (brick.hitCount > 1) {
+                  return { ...brick, hitCount: brick.hitCount - 1 };
+                } else {
+                  return { ...brick, status: 0 };
+                }
               }
             }
             return brick;
@@ -106,21 +115,23 @@ const PlayScreen = () => {
     return () => clearInterval(interval);
   }, [ballDirection, paddlePosition, bricks, gameRunning]);
 
-  const startGame = () => {
-    setBricks(initializeBricks()); // Rebuild the bricks
-    setBallPosition({ x: width / 2, y: height / 2 }); // Reset ball position
-    setGameRunning(true);
+  const toggleGame = () => {
+    if (gameRunning) {
+      setGameRunning(false);
+    } else {
+      setBricks(initializeBricks()); // Rebuild the bricks
+      setBallPosition({ x: width / 2, y: height / 2 }); // Reset ball position
+      setGameRunning(true);
+    }
   };
 
   return (
     <View style={styles.container} {...panResponder.panHandlers}>
-      {!gameRunning && (
-        <View style={styles.startButtonContainer}>
-          <TouchableOpacity onPress={startGame} style={styles.startButton}>
-            <Text style={styles.startButtonText}>START</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <View style={styles.startButtonContainer}>
+        <TouchableOpacity onPress={toggleGame} style={styles.startButton}>
+          <Text style={styles.startButtonText}>{gameRunning ? "STOP" : "START"}</Text>
+        </TouchableOpacity>
+      </View>
       <View
         style={[
           styles.ball,
@@ -190,7 +201,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: brickWidth,
     height: brickHeight,
-    backgroundColor: "#E9942F",
   },
 });
 
