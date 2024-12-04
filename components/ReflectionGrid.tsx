@@ -8,7 +8,14 @@ const ScheduleGrid = () => {
     date.setDate(date.getDate() + i);
     return `${date.getDate()}/${date.getMonth() + 1}`;
   });
-  const hours = Array.from({ length: 20 }, (_, i) => `${i + 9}h`);
+
+  // Generate time in 30-minute increments from 9:00 to 18:30
+  const hours = Array.from({ length: 20 }, (_, i) => {
+    const hour = Math.floor(i / 2) + 9;
+    const minutes = i % 2 === 0 ? "00" : "30";
+    return `${hour}:${minutes}`;
+  });
+
   const colors = [
     "#C4C4C4",
     "#A9A9A9",
@@ -27,32 +34,55 @@ const ScheduleGrid = () => {
 
   return (
     <ScrollView horizontal>
-      <View style={styles.grid}>
-        {dates.map((date, dateIndex) => (
-          <View key={dateIndex} style={styles.column}>
-            <Text style={styles.dateHeader}>{date}</Text>
-            {hours.map((hour, hourIndex) => (
-              <View
-                key={hourIndex}
-                style={[
-                  styles.cell,
-                  { backgroundColor: colors[hourIndex % colors.length] },
-                ]}
-              >
-                {/* <Text style={styles.hourText}>{hour}</Text> */}
-              </View>
-            ))}
-          </View>
-        ))}
+      <View style={styles.container}>
+        <View style={styles.hourColumn}>
+          {hours.map((hour, index) => (
+            <View key={index} style={styles.hourCell}>
+              <Text style={styles.hourText}>{hour}</Text>
+            </View>
+          ))}
+        </View>
+        <View style={styles.grid}>
+          {dates.map((date, dateIndex) => (
+            <View key={dateIndex} style={styles.column}>
+              <Text style={styles.dateHeader}>{date}</Text>
+              {hours.map((hour, hourIndex) => (
+                <View
+                  key={hourIndex}
+                  style={[
+                    styles.cell,
+                    { backgroundColor: colors[hourIndex % colors.length] },
+                  ]}
+                >
+                    {/* <Text style={styles.hourText}>{hour}</Text> */}
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+  },
+  hourColumn: {
+    marginRight: 0,
+    marginTop: 20,
+  },
+  hourCell: {
+    height: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 2,
+    fontSize: 10,
+  },
   grid: {
     flexDirection: "row",
-    marginLeft: 18,
+    marginLeft: 6,
   },
   column: {
     marginHorizontal: 1,
@@ -73,8 +103,9 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   hourText: {
-    fontSize: 12,
+    fontSize: 8,
     color: "black",
+    marginLeft: 6,
   },
 });
 
