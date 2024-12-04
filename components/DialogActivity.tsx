@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   View,
   Text,
   TextInput,
-  Button,
-  StyleSheet,
   TouchableOpacity,
+  StyleSheet,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -20,6 +19,25 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
   visible,
   toggleVisibility,
 }) => {
+  const [selectedColorIndex, setSelectedColorIndex] = useState<number | null>(
+    null,
+  );
+
+  const colors = [
+    "#0B0E1A",
+    "#0B3D91",
+    "#0B6623",
+    "#8A9A5B",
+    "#FF6347",
+    "#CD5C5C",
+    "#8B4513",
+    "#D3D3D3",
+    "#4682B4",
+    "#B0C4DE",
+    "#FFA500",
+    "#FFFACD",
+  ];
+
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
       <KeyboardAvoidingView
@@ -33,27 +51,29 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
           >
             <Text style={styles.closeButtonText}>X</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>Add a note</Text>
+          <Text style={styles.title}>Edit Activities</Text>
           <TextInput
             style={styles.input}
-            placeholder="Type the note here..."
-            multiline
+            placeholder="Type the activity name"
+            placeholderTextColor="#A9A9A9"
           />
-          <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>What's your energy level</Text>
+          <View style={{ width: "85%", marginTop: 30, marginBottom: 10 }}>
+            <Text style={styles.subtitle}>Choose activity color</Text>
           </View>
-          <View style={styles.energyLevels}>
-            {["#FF4C4C", "#FF6666", "#FF8080", "#FF9999"].map(
-              (color, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={[styles.energyBar, { backgroundColor: color }]}
-                  onPress={() => {
-                    // Add your onPress logic here
-                  }}
-                />
-              ),
-            )}
+          <View style={styles.colorGrid}>
+            {colors.map((color, index) => (
+              <TouchableOpacity
+                key={index}
+                style={[
+                  styles.colorBox,
+                  {
+                    backgroundColor:
+                      selectedColorIndex === index ? "white" : color,
+                  },
+                ]}
+                onPress={() => setSelectedColorIndex(index)}
+              />
+            ))}
           </View>
           <TouchableOpacity onPress={toggleVisibility}>
             <Text style={styles.saveButton}>Save</Text>
@@ -90,44 +110,45 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   title: {
-    fontSize: 14,
+    fontSize: 16,
     color: "white",
     marginBottom: 20,
     marginTop: 12,
   },
   input: {
     width: "85%",
-    height: 230,
+    height: 40,
     borderColor: "white",
-    borderWidth: 1,
+    borderBottomWidth: 1,
     color: "white",
-    fontSize: 12,
+    fontSize: 10,
     marginBottom: 20,
-    padding: 14,
+    marginTop: 20,
+    padding: 0,
   },
   subtitle: {
     fontSize: 12,
     color: "white",
     marginBottom: 10,
-    marginTop: 4,
     alignSelf: "flex-start",
   },
-  energyLevels: {
+  colorGrid: {
     width: "85%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
-  energyBar: {
-    height: 20,
-    marginBottom: 5,
+  colorBox: {
+    width: "45%",
+    height: 40,
+    marginBottom: 10,
   },
   saveButton: {
     color: "white",
+    fontSize: 12,
     textDecorationLine: "underline",
     marginBottom: 10,
-  },
-  subtitleContainer: {
-    width: "85%",
-    alignItems: "flex-start",
   },
 });
 

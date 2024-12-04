@@ -2,7 +2,8 @@ import { SafeAreaView, View, ScrollView, TouchableOpacity } from "react-native";
 import { Svg, Rect, Circle, Line } from "react-native-svg";
 import { useState } from "react";
 import * as Haptics from "expo-haptics";
-import SimpleDialog from "@/components/Dialog";
+import SimpleDialog from "@/components/DialogNote";
+import DialogActivity from "@/components/DialogActivity";
 
 import { ThemedText } from "@/components/ThemedText";
 
@@ -12,7 +13,8 @@ export default function HomeScreen() {
   const [sliceColors, setSliceColors] = useState<string[]>(
     Array(48).fill("transparent"),
   );
-  const [isDialogVisible, setDialogVisible] = useState(false);
+  const [isNoteDialogVisible, setNoteDialogVisible] = useState(false);
+  const [isActivityDialogVisible, setActivityDialogVisible] = useState(false);
 
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
@@ -34,8 +36,12 @@ export default function HomeScreen() {
     setSelectedColor(color);
   };
 
-  const toggleDialogVisibility = () => {
-    setDialogVisible(!isDialogVisible);
+  const toggleNoteDialogVisibility = () => {
+    setNoteDialogVisible(!isNoteDialogVisible);
+  };
+
+  const toggleActivityDialogVisibility = () => {
+    setActivityDialogVisible(!isActivityDialogVisible);
   };
 
   const colorLabels = {
@@ -157,7 +163,7 @@ export default function HomeScreen() {
                   {timeLabel}
                 </ThemedText>
                 <TouchableOpacity
-                  onPress={toggleDialogVisibility}
+                  onPress={toggleNoteDialogVisibility}
                   style={{
                     width: 40,
                     height: 40,
@@ -228,16 +234,18 @@ export default function HomeScreen() {
           <ThemedText style={{ fontSize: 15, color: "black" }}>
             Activities
           </ThemedText>
-          <ThemedText
-            style={{
-              fontSize: 10,
-              color: "black",
-              textDecorationLine: "underline",
-              marginLeft: 20,
-            }}
-          >
-            Edit
-          </ThemedText>
+          <TouchableOpacity onPress={toggleActivityDialogVisibility}>
+            <ThemedText
+              style={{
+                fontSize: 10,
+                color: "black",
+                textDecorationLine: "underline",
+                marginLeft: 20,
+              }}
+            >
+              Edit
+            </ThemedText>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -300,8 +308,12 @@ export default function HomeScreen() {
         </View>
       </View>
       <SimpleDialog
-        visible={isDialogVisible}
-        toggleVisibility={toggleDialogVisibility}
+        visible={isNoteDialogVisible}
+        toggleVisibility={toggleNoteDialogVisibility}
+      />
+      <DialogActivity
+        visible={isActivityDialogVisible}
+        toggleVisibility={toggleActivityDialogVisibility}
       />
     </SafeAreaView>
   );
