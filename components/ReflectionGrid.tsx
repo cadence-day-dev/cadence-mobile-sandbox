@@ -10,20 +10,20 @@ const ScheduleGrid = () => {
   });
 
   // Generate time in 30-minute increments from 9:00 to 18:30
-  const hours = Array.from({ length: 24 }, (_, i) => {
+  const hours = Array.from({ length: 18 }, (_, i) => {
     const hour = Math.floor(i / 2) + 9;
     const minutes = i % 2 === 0 ? "00" : "30";
     return `${hour}:${minutes}`;
   });
 
   const colors = [
-    "#141F2C",
+    // "#141F2C",
     // "#024886",
-    // "#6D7D8D",
+    "#6D7D8D",
     "#B4C5D6",
     "#E9942F",
-    "#9D8266",
-    // "#A5A1A0",
+    // "#9D8266",
+    "#A5A1A0",
     "#DAEBFD",
   ];
 
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     marginTop: 27,
   },
   hourCell: {
-    height: 13,
+    height: 18,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 2,
@@ -121,14 +121,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 1,
   },
   dateHeader: {
-    fontSize: 10,
+    fontSize: 9,
     textAlign: "left",
-    marginBottom: 5,
+    marginBottom: 8,
     marginTop: 10,
+    color: "black",
   },
   cell: {
-    width: 48,
-    height: 13,
+    width: 70,
+    height: 18,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,

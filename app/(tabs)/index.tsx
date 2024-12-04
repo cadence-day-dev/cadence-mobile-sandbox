@@ -96,7 +96,7 @@ export default function HomeScreen() {
         </ThemedText>
         <ThemedText
           style={{
-            fontSize: 14,
+            fontSize: 12,
             color: "black",
             textTransform: "uppercase",
             marginBottom: 2,

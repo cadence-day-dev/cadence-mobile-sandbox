@@ -31,8 +31,8 @@ export default function ReflectionScreen() {
   const [selectedStartDate, setSelectedStartDate] = useState("01/11/2024");
   const [selectedEndDate, setSelectedEndDate] = useState("01/11/2024");
 
-  const [selectedStartHour, setSelectedStartHour] = useState("00:00");
-  const [selectedEndHour, setSelectedEndHour] = useState("23:30");
+  const [selectedStartHour, setSelectedStartHour] = useState("09:00");
+  const [selectedEndHour, setSelectedEndHour] = useState("18:30");
 
   const [isStartHourMenuVisible, setStartHourMenuVisible] = useState(false);
   const [isEndHourMenuVisible, setEndHourMenuVisible] = useState(false);
@@ -175,15 +175,15 @@ export default function ReflectionScreen() {
               style={{
                 fontSize: 14,
                 color: "black",
-                textDecorationLine: "underline",
                 textTransform: "uppercase",
+                textDecorationLine: "underline",
               }}
             >
               {selectedMonth}
             </ThemedText>
           </TouchableOpacity>
         </View>
-        <View
+        {/* <View
           style={{
             flexDirection: "row",
             alignItems: "center",
@@ -196,8 +196,7 @@ export default function ReflectionScreen() {
                 fontSize: 12,
                 color: "black",
                 textTransform: "uppercase",
-                textDecorationLine: "underline",
-                marginRight: 5,
+
               }}
             >
               {selectedStartDate}
@@ -219,13 +218,12 @@ export default function ReflectionScreen() {
                 fontSize: 12,
                 color: "black",
                 textTransform: "uppercase",
-                textDecorationLine: "underline",
               }}
             >
               {selectedEndDate}
             </ThemedText>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <View
           style={{
@@ -237,11 +235,9 @@ export default function ReflectionScreen() {
           <TouchableOpacity onPress={() => setStartHourMenuVisible(true)}>
             <ThemedText
               style={{
-                fontSize: 14,
+                fontSize: 12,
                 color: "black",
                 textTransform: "uppercase",
-                textDecorationLine: "underline",
-                marginRight: 5,
               }}
             >
               {selectedStartHour}
@@ -249,7 +245,7 @@ export default function ReflectionScreen() {
           </TouchableOpacity>
           <ThemedText
             style={{
-              fontSize: 14,
+              fontSize: 12,
               color: "black",
               textTransform: "uppercase",
               marginHorizontal: 5,
@@ -260,10 +256,9 @@ export default function ReflectionScreen() {
           <TouchableOpacity onPress={() => setEndHourMenuVisible(true)}>
             <ThemedText
               style={{
-                fontSize: 14,
+                fontSize: 12,
                 color: "black",
                 textTransform: "uppercase",
-                textDecorationLine: "underline",
               }}
             >
               {selectedEndHour}
