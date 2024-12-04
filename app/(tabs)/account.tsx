@@ -76,9 +76,11 @@ export default function AccountScreen() {
         </Svg>
         <ThemedText
           style={{
-            fontSize: 10,
+            fontSize: 14,
             color: "black",
             marginBottom: 2,
+            marginBottom: 2,
+            marginTop: -8,
           }}
         >
           Account
