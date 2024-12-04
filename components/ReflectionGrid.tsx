@@ -10,7 +10,7 @@ const ScheduleGrid = () => {
   });
 
   // Generate time in 30-minute increments from 9:00 to 18:30
-  const hours = Array.from({ length: 25 }, (_, i) => {
+  const hours = Array.from({ length: 24 }, (_, i) => {
     const hour = Math.floor(i / 2) + 9;
     const minutes = i % 2 === 0 ? "00" : "30";
     return `${hour}:${minutes}`;
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   hourColumn: {
     marginRight: 0,
-    marginTop: 20,
+    marginTop: 27,
   },
   hourCell: {
     height: 13,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: "left",
     marginBottom: 5,
-    marginTop: 5,
+    marginTop: 10,
   },
   cell: {
     width: 48,
