@@ -27,7 +27,10 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.dialog}>
-          <TouchableOpacity style={styles.closeButton} onPress={toggleVisibility}>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={toggleVisibility}
+          >
             <Text style={styles.closeButtonText}>X</Text>
           </TouchableOpacity>
           <Text style={styles.title}>Add a note</Text>
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
     marginBottom: 20,
-    padding: 10,
+    padding: 14,
   },
   subtitle: {
     fontSize: 12,
@@ -125,13 +128,6 @@ const styles = StyleSheet.create({
   subtitleContainer: {
     width: "85%",
     alignItems: "flex-start",
-  },
-  placeholderText: {
-    position: "absolute",
-    top: 10,
-    left: 20,
-    fontSize: 10,
-    color: "#888",
   },
 });
 
