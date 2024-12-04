@@ -14,6 +14,7 @@ import SimpleDialog from "@/components/DialogNote";
 import DialogActivity from "@/components/DialogActivity";
 
 import { ThemedText } from "@/components/ThemedText";
+import ScheduleGrid from "@/components/ReflectionGrid";
 
 export default function ReflectionScreen() {
   const [pressedStates, setPressedStates] = useState(Array(48).fill(false));
@@ -276,102 +277,7 @@ export default function ReflectionScreen() {
           paddingVertical: 0,
         }}
       >
-        <ScrollView
-          horizontal
-          contentContainerStyle={{
-            flexDirection: "row",
-            paddingVertical: 20,
-            paddingHorizontal: 10,
-          }}
-        >
-          {Array.from({ length: 48 }).map((_, index) => {
-            const hours = String(Math.floor(index / 2)).padStart(2, "0");
-            const minutes = index % 2 === 0 ? "00" : "30";
-            const timeLabel = `${hours}:${minutes}`;
-            const isPressed = pressedStates[index];
-
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => handlePress(index)}
-                activeOpacity={1}
-                style={{
-                  width: 50,
-                  height: "100%",
-                  borderWidth: 1,
-                  borderColor: "#6646EC",
-                  marginHorizontal: 2,
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingVertical: 0,
-                  backgroundColor: sliceColors[index],
-                }}
-              >
-                <ThemedText
-                  style={{
-                    width: 40,
-                    fontSize: 9,
-                    color: "black",
-                    marginTop: 10,
-                    textAlign: "center",
-                  }}
-                >
-                  {timeLabel}
-                </ThemedText>
-                <TouchableOpacity
-                  onPress={toggleNoteDialogVisibility}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Svg
-                    width="14"
-                    height="17"
-                    viewBox="0 0 14 17"
-                    fill="none"
-                    style={{
-                      position: "absolute",
-                      bottom: 10,
-                      opacity: index % 6 === 0 ? 1 : 0.5, // Change opacity based on index
-                    }}
-                  >
-                    <Rect
-                      x="0.5"
-                      y="0.5"
-                      width="13.0076"
-                      height="16"
-                      stroke="black"
-                    />
-                    <Line
-                      x1="2.35742"
-                      y1="4.39453"
-                      x2="11.7883"
-                      y2="4.39453"
-                      stroke="black"
-                    />
-                    <Line
-                      x1="2.35742"
-                      y1="8.77344"
-                      x2="11.7883"
-                      y2="8.77344"
-                      stroke="black"
-                    />
-                    <Line
-                      x1="2.35742"
-                      y1="12.8945"
-                      x2="11.7883"
-                      y2="12.8945"
-                      stroke="black"
-                    />
-                  </Svg>
-                </TouchableOpacity>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+        <ScheduleGrid />
       </View>
       {/* Third Box - 20% height */}
       <View

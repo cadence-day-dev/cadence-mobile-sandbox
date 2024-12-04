@@ -2,8 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 const ScheduleGrid = () => {
-  const dates = ["1/11", "2/11", "3/11", "4/11", "5/11"];
-  const hours = Array.from({ length: 13 }, (_, i) => `${i + 9}h`);
+  const dates = Array.from({ length: 30 }, (_, i) => {
+    const date = new Date();
+    date.setDate(1);
+    date.setDate(date.getDate() + i);
+    return `${date.getDate()}/${date.getMonth() + 1}`;
+  });
+  const hours = Array.from({ length: 20 }, (_, i) => `${i + 9}h`);
   const colors = [
     "#C4C4C4",
     "#A9A9A9",
@@ -34,7 +39,7 @@ const ScheduleGrid = () => {
                   { backgroundColor: colors[hourIndex % colors.length] },
                 ]}
               >
-                <Text style={styles.hourText}>{hour}</Text>
+                {/* <Text style={styles.hourText}>{hour}</Text> */}
               </View>
             ))}
           </View>
@@ -47,19 +52,20 @@ const ScheduleGrid = () => {
 const styles = StyleSheet.create({
   grid: {
     flexDirection: "row",
+    marginLeft: 18,
   },
   column: {
-    marginHorizontal: 5,
+    marginHorizontal: 1,
   },
   dateHeader: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontSize: 10,
+    textAlign: "left",
     marginBottom: 5,
+    marginTop: 5,
   },
   cell: {
-    width: 50,
-    height: 40,
+    width: 60,
+    height: 16,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
