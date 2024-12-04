@@ -2,6 +2,7 @@ import { SafeAreaView, View, ScrollView, TouchableOpacity } from "react-native";
 import { Svg, Rect, Circle, Line } from "react-native-svg";
 import { useState } from "react";
 import * as Haptics from "expo-haptics";
+import SimpleDialog from "@/components/Dialog";
 
 import { ThemedText } from "@/components/ThemedText";
 
@@ -11,6 +12,7 @@ export default function HomeScreen() {
   const [sliceColors, setSliceColors] = useState<string[]>(
     Array(48).fill("transparent"),
   );
+  const [isDialogVisible, setDialogVisible] = useState(false);
 
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
@@ -30,6 +32,10 @@ export default function HomeScreen() {
 
   const handleColorPress = (color: string) => {
     setSelectedColor(color);
+  };
+
+  const toggleDialogVisibility = () => {
+    setDialogVisible(!isDialogVisible);
   };
 
   const colorLabels = {
@@ -150,7 +156,15 @@ export default function HomeScreen() {
                 >
                   {timeLabel}
                 </ThemedText>
-                {index % 6 === 0 && (
+                <TouchableOpacity
+                  onPress={toggleDialogVisibility}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <Svg
                     width="14"
                     height="17"
@@ -159,6 +173,7 @@ export default function HomeScreen() {
                     style={{
                       position: "absolute",
                       bottom: 10,
+                      opacity: index % 6 === 0 ? 1 : 0.5, // Change opacity based on index
                     }}
                   >
                     <Rect
@@ -190,7 +205,7 @@ export default function HomeScreen() {
                       stroke="black"
                     />
                   </Svg>
-                )}
+                </TouchableOpacity>
               </TouchableOpacity>
             );
           })}
@@ -284,6 +299,10 @@ export default function HomeScreen() {
           </View>
         </View>
       </View>
+      <SimpleDialog
+        visible={isDialogVisible}
+        toggleVisibility={toggleDialogVisibility}
+      />
     </SafeAreaView>
   );
 }
