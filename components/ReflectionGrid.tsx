@@ -17,19 +17,14 @@ const ScheduleGrid = () => {
   });
 
   const colors = [
-    "#C4C4C4",
-    "#A9A9A9",
-    "#8B8B8B",
-    "#6E6E6E",
-    "#505050",
-    "#333333",
-    "#FFAA00",
-    "#FFAA00",
-    "#333333",
-    "#505050",
-    "#6E6E6E",
-    "#8B8B8B",
-    "#A9A9A9",
+    "#141F2C",
+    // "#024886",
+    // "#6D7D8D",
+    "#B4C5D6",
+    "#E9942F",
+    "#9D8266",
+    // "#A5A1A0",
+    "#DAEBFD",
   ];
 
   return (
@@ -57,7 +52,10 @@ const ScheduleGrid = () => {
                   key={hourIndex}
                   style={[
                     styles.cell,
-                    { backgroundColor: colors[hourIndex % colors.length] },
+                    {
+                      backgroundColor:
+                        colors[Math.floor(Math.random() * colors.length)],
+                    },
                   ]}
                 >
                     {/* <Text style={styles.hourText}>{hour}</Text> */}

@@ -138,28 +138,36 @@ export default function ReflectionScreen() {
           <Circle cx="15" cy="7" r="1.5" stroke="black" />
           <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
         </Svg>
-        <ThemedText
+        <View
           style={{
-            fontSize: 14,
-            color: "black",
-            marginRight: 5,
-            marginTop: -8,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: 2,
           }}
         >
-          Daily Patterns
-        </ThemedText>
-        <TouchableOpacity onPress={toggleMonthMenu}>
           <ThemedText
             style={{
               fontSize: 14,
               color: "black",
-              textDecorationLine: "underline",
-              textTransform: "uppercase",
+              marginRight: 5,
             }}
           >
-            {selectedMonth}
+            Pattern of your
           </ThemedText>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={toggleMonthMenu}>
+            <ThemedText
+              style={{
+                fontSize: 14,
+                color: "black",
+                textDecorationLine: "underline",
+                textTransform: "uppercase",
+              }}
+            >
+              {selectedMonth}
+            </ThemedText>
+          </TouchableOpacity>
+        </View>
         <View
           style={{
             flexDirection: "row",
