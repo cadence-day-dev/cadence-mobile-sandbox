@@ -27,6 +27,8 @@ export default function ReflectionScreen() {
   const [isMonthMenuVisible, setMonthMenuVisible] = useState(false);
   const [isStartDateMenuVisible, setStartDateMenuVisible] = useState(false);
   const [isEndDateMenuVisible, setEndDateMenuVisible] = useState(false);
+  const [selectedStartDate, setSelectedStartDate] = useState("01/11/2024");
+  const [selectedEndDate, setSelectedEndDate] = useState("01/11/2024");
 
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
@@ -72,6 +74,11 @@ export default function ReflectionScreen() {
   const toggleEndDateMenu = () => {
     setEndDateMenuVisible(!isEndDateMenuVisible);
   };
+
+  const dates = Array.from({ length: 30 }, (_, i) => {
+    const day = String(i + 1).padStart(2, "0");
+    return `${day}/11/2024`;
+  });
 
   const colorLabels = {
     work: "#141F2C",
@@ -170,7 +177,7 @@ export default function ReflectionScreen() {
                 marginRight: 5,
               }}
             >
-              01/11/2024
+              {selectedStartDate}
             </ThemedText>
           </TouchableOpacity>
           <ThemedText
@@ -192,7 +199,7 @@ export default function ReflectionScreen() {
                 textDecorationLine: "underline",
               }}
             >
-              01/11/2024
+              {selectedEndDate}
             </ThemedText>
           </TouchableOpacity>
         </View>
@@ -219,7 +226,18 @@ export default function ReflectionScreen() {
           <Modal transparent={true} animationType="fade">
             <View style={styles.modalBackground}>
               <View style={styles.menu}>
-                {/* Implement your start date selection logic here */}
+                {dates.map((date) => (
+                  <TouchableOpacity
+                    key={date}
+                    onPress={() => {
+                      setSelectedStartDate(date);
+                      setStartDateMenuVisible(false);
+                    }}
+                    style={styles.menuItem}
+                  >
+                    <Text style={styles.menuItemText}>{date}</Text>
+                  </TouchableOpacity>
+                ))}
               </View>
             </View>
           </Modal>
@@ -229,7 +247,18 @@ export default function ReflectionScreen() {
           <Modal transparent={true} animationType="fade">
             <View style={styles.modalBackground}>
               <View style={styles.menu}>
-                {/* Implement your end date selection logic here */}
+                {dates.map((date) => (
+                  <TouchableOpacity
+                    key={date}
+                    onPress={() => {
+                      setSelectedEndDate(date);
+                      setEndDateMenuVisible(false);
+                    }}
+                    style={styles.menuItem}
+                  >
+                    <Text style={styles.menuItemText}>{date}</Text>
+                  </TouchableOpacity>
+                ))}
               </View>
             </View>
           </Modal>
@@ -455,6 +484,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     backgroundColor: "white",
+    height: 400,
     borderRadius: 5,
     padding: 10,
     width: 200,
