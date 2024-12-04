@@ -90,7 +90,6 @@ export default function ReflectionScreen() {
     friends: "#9D8266",
     grocery: "#A5A1A0",
     rest: "#DAEBFD",
-    clear: "transparent",
   };
 
   // Define the months array
@@ -296,18 +295,6 @@ export default function ReflectionScreen() {
           <ThemedText style={{ fontSize: 15, color: "black" }}>
             Activities
           </ThemedText>
-          <TouchableOpacity onPress={toggleActivityDialogVisibility}>
-            <ThemedText
-              style={{
-                fontSize: 10,
-                color: "black",
-                textDecorationLine: "underline",
-                marginLeft: 20,
-              }}
-            >
-              Edit
-            </ThemedText>
-          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -352,21 +339,6 @@ export default function ReflectionScreen() {
               </ThemedText>
             </View>
           ))}
-          <View
-            style={{
-              width: 60,
-              height: 32,
-              borderWidth: 1,
-              borderColor: "#A1A1A1",
-              justifyContent: "center",
-              alignItems: "center",
-              marginRight: 10,
-              marginBottom: 10,
-              backgroundColor: "transparent",
-            }}
-          >
-            <ThemedText style={{ fontSize: 16, color: "black" }}>+</ThemedText>
-          </View>
         </View>
       </View>
       <SimpleDialog

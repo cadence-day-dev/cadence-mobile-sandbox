@@ -10,7 +10,7 @@ const ScheduleGrid = () => {
   });
 
   // Generate time in 30-minute increments from 9:00 to 18:30
-  const hours = Array.from({ length: 20 }, (_, i) => {
+  const hours = Array.from({ length: 25 }, (_, i) => {
     const hour = Math.floor(i / 2) + 9;
     const minutes = i % 2 === 0 ? "00" : "30";
     return `${hour}:${minutes}`;
@@ -37,8 +37,14 @@ const ScheduleGrid = () => {
       <View style={styles.container}>
         <View style={styles.hourColumn}>
           {hours.map((hour, index) => (
-            <View key={index} style={styles.hourCell}>
-              <Text style={styles.hourText}>{hour}</Text>
+            <View
+              key={index}
+              style={[
+                styles.hourCell,
+                index % 2 !== 0 && styles.transparentCell, // Apply transparency to every 30-minute increment
+              ]}
+            >
+              <Text style={styles.hourText}>{index % 2 === 0 ? hour : ""}</Text>
             </View>
           ))}
         </View>
@@ -74,11 +80,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   hourCell: {
-    height: 16,
+    height: 13,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 2,
-    fontSize: 10,
+  },
+  transparentCell: {
+    backgroundColor: "transparent", // Make the cell transparent
   },
   grid: {
     flexDirection: "row",
@@ -94,8 +102,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   cell: {
-    width: 60,
-    height: 16,
+    width: 48,
+    height: 13,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
