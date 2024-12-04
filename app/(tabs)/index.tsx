@@ -15,7 +15,6 @@ export default function HomeScreen() {
   );
   const [isNoteDialogVisible, setNoteDialogVisible] = useState(false);
   const [isActivityDialogVisible, setActivityDialogVisible] = useState(false);
-
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
       const newStates = [...prevStates];
@@ -90,7 +89,6 @@ export default function HomeScreen() {
           style={{
             fontSize: 14,
             color: "black",
-            textDecorationLine: "underline",
             marginBottom: 2,
           }}
         >
