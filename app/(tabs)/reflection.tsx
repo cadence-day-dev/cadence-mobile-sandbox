@@ -193,7 +193,7 @@ export default function ReflectionScreen() {
           <TouchableOpacity onPress={toggleStartDateMenu}>
             <ThemedText
               style={{
-                fontSize: 14,
+                fontSize: 12,
                 color: "black",
                 textTransform: "uppercase",
                 textDecorationLine: "underline",
@@ -205,7 +205,7 @@ export default function ReflectionScreen() {
           </TouchableOpacity>
           <ThemedText
             style={{
-              fontSize: 14,
+              fontSize: 12,
               color: "black",
               textTransform: "uppercase",
               marginHorizontal: 5,
@@ -216,7 +216,7 @@ export default function ReflectionScreen() {
           <TouchableOpacity onPress={toggleEndDateMenu}>
             <ThemedText
               style={{
-                fontSize: 14,
+                fontSize: 12,
                 color: "black",
                 textTransform: "uppercase",
                 textDecorationLine: "underline",

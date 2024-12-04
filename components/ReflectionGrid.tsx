@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal } from "react-native";
 
 const ScheduleGrid = () => {
   const dates = Array.from({ length: 30 }, (_, i) => {
@@ -27,6 +27,9 @@ const ScheduleGrid = () => {
     "#DAEBFD",
   ];
 
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [selectedHour, setSelectedHour] = useState<string | null>(null);
+
   return (
     <ScrollView horizontal>
       <View style={styles.container}>
@@ -48,7 +51,7 @@ const ScheduleGrid = () => {
             <View key={dateIndex} style={styles.column}>
               <Text style={styles.dateHeader}>{date}</Text>
               {hours.map((hour, hourIndex) => (
-                <View
+                <TouchableOpacity
                   key={hourIndex}
                   style={[
                     styles.cell,
@@ -57,14 +60,38 @@ const ScheduleGrid = () => {
                         colors[Math.floor(Math.random() * colors.length)],
                     },
                   ]}
+                  onPress={() => {
+                    setSelectedHour(hour);
+                    setModalVisible(true);
+                  }}
                 >
-                    {/* <Text style={styles.hourText}>{hour}</Text> */}
-                </View>
+                  {/* <Text style={styles.hourText}>{hour}</Text> */}
+                </TouchableOpacity>
               ))}
             </View>
           ))}
         </View>
       </View>
+      <Modal
+        transparent={true}
+        visible={isModalVisible}
+        animationType="slide"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              {selectedHour ? `Note for ${selectedHour}` : "No hour selected"}
+            </Text>
+            <TouchableOpacity
+              onPress={() => setModalVisible(false)}
+              style={styles.closeButton}
+            >
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
@@ -112,6 +139,32 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: "black",
     marginLeft: 6,
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 0,
+    alignItems: "center",
+  },
+  modalText: {
+    fontSize: 10,
+    marginBottom: 20,
+  },
+  closeButton: {
+    padding: 10,
+    backgroundColor: "#A5A1A0",
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: "white",
+    fontSize: 10,
   },
 });
 
