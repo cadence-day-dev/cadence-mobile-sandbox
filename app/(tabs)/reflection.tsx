@@ -31,6 +31,12 @@ export default function ReflectionScreen() {
   const [selectedStartDate, setSelectedStartDate] = useState("01/11/2024");
   const [selectedEndDate, setSelectedEndDate] = useState("01/11/2024");
 
+  const [selectedStartHour, setSelectedStartHour] = useState("00:00");
+  const [selectedEndHour, setSelectedEndHour] = useState("23:30");
+
+  const [isStartHourMenuVisible, setStartHourMenuVisible] = useState(false);
+  const [isEndHourMenuVisible, setEndHourMenuVisible] = useState(false);
+
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
       const newStates = [...prevStates];
@@ -74,6 +80,14 @@ export default function ReflectionScreen() {
 
   const toggleEndDateMenu = () => {
     setEndDateMenuVisible(!isEndDateMenuVisible);
+  };
+
+  const toggleStartHourMenu = () => {
+    setStartHourMenuVisible(!isStartHourMenuVisible);
+  };
+
+  const toggleEndHourMenu = () => {
+    setEndHourMenuVisible(!isEndHourMenuVisible);
   };
 
   const dates = Array.from({ length: 30 }, (_, i) => {
@@ -144,6 +158,7 @@ export default function ReflectionScreen() {
             alignItems: "center",
             justifyContent: "space-between",
             marginBottom: 2,
+            marginTop: -8,
           }}
         >
           <ThemedText
@@ -212,6 +227,50 @@ export default function ReflectionScreen() {
           </TouchableOpacity>
         </View>
 
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 2,
+          }}
+        >
+          <TouchableOpacity onPress={() => setStartHourMenuVisible(true)}>
+            <ThemedText
+              style={{
+                fontSize: 14,
+                color: "black",
+                textTransform: "uppercase",
+                textDecorationLine: "underline",
+                marginRight: 5,
+              }}
+            >
+              {selectedStartHour}
+            </ThemedText>
+          </TouchableOpacity>
+          <ThemedText
+            style={{
+              fontSize: 14,
+              color: "black",
+              textTransform: "uppercase",
+              marginHorizontal: 5,
+            }}
+          >
+            –
+          </ThemedText>
+          <TouchableOpacity onPress={() => setEndHourMenuVisible(true)}>
+            <ThemedText
+              style={{
+                fontSize: 14,
+                color: "black",
+                textTransform: "uppercase",
+                textDecorationLine: "underline",
+              }}
+            >
+              {selectedEndHour}
+            </ThemedText>
+          </TouchableOpacity>
+        </View>
+
         {isMonthMenuVisible && (
           <Modal transparent={true} animationType="fade">
             <View style={styles.modalBackground}>
@@ -265,6 +324,48 @@ export default function ReflectionScreen() {
                     style={styles.menuItem}
                   >
                     <Text style={styles.menuItemText}>{date}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+          </Modal>
+        )}
+
+        {isStartHourMenuVisible && (
+          <Modal transparent={true} animationType="fade">
+            <View style={styles.modalBackground}>
+              <View style={styles.menu}>
+                {Array.from({ length: 24 }, (_, i) => (
+                  <TouchableOpacity
+                    key={i}
+                    onPress={() => {
+                      setSelectedStartHour(`${i.toString().padStart(2, "0")}:00`);
+                      setStartHourMenuVisible(false);
+                    }}
+                    style={styles.menuItem}
+                  >
+                    <Text style={styles.menuItemText}>{`${i.toString().padStart(2, "0")}:00`}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+          </Modal>
+        )}
+
+        {isEndHourMenuVisible && (
+          <Modal transparent={true} animationType="fade">
+            <View style={styles.modalBackground}>
+              <View style={styles.menu}>
+                {Array.from({ length: 24 }, (_, i) => (
+                  <TouchableOpacity
+                    key={i}
+                    onPress={() => {
+                      setSelectedEndHour(`${i.toString().padStart(2, "0")}:30`);
+                      setEndHourMenuVisible(false);
+                    }}
+                    style={styles.menuItem}
+                  >
+                    <Text style={styles.menuItemText}>{`${i.toString().padStart(2, "0")}:30`}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
