@@ -29,6 +29,7 @@ const ScheduleGrid = () => {
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedHour, setSelectedHour] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   return (
     <ScrollView horizontal>
@@ -51,8 +52,7 @@ const ScheduleGrid = () => {
             <View key={dateIndex} style={styles.column}>
               <Text style={styles.dateHeader}>{date}</Text>
               {hours.map((hour, hourIndex) => {
-                // Calculate a consistent offset for color selection
-                const offset = Math.floor(hourIndex / 2); // Change divisor to 4 for 4-cell blocks
+                const offset = Math.floor(hourIndex / 4);
                 const colorIndex = (hourIndex - offset) % colors.length;
 
                 return (
@@ -66,6 +66,7 @@ const ScheduleGrid = () => {
                     ]}
                     onPress={() => {
                       setSelectedHour(hour);
+                      setSelectedDate(date);
                       setModalVisible(true);
                     }}
                   >
@@ -87,7 +88,7 @@ const ScheduleGrid = () => {
         <View style={styles.modalBackground}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>
-              {selectedHour ? `Note for ${selectedHour}` : "No hour selected"}
+              {selectedDate ? `${selectedDate}  -  ${selectedHour}` : "No hour selected"}
             </Text>
             <TouchableOpacity
               onPress={() => setModalVisible(false)}

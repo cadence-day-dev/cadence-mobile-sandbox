@@ -183,48 +183,6 @@ export default function ReflectionScreen() {
             </ThemedText>
           </TouchableOpacity>
         </View>
-        {/* <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: 2,
-          }}
-        >
-          <TouchableOpacity onPress={toggleStartDateMenu}>
-            <ThemedText
-              style={{
-                fontSize: 12,
-                color: "black",
-                textTransform: "uppercase",
-
-              }}
-            >
-              {selectedStartDate}
-            </ThemedText>
-          </TouchableOpacity>
-          <ThemedText
-            style={{
-              fontSize: 12,
-              color: "black",
-              textTransform: "uppercase",
-              marginHorizontal: 5,
-            }}
-          >
-            –
-          </ThemedText>
-          <TouchableOpacity onPress={toggleEndDateMenu}>
-            <ThemedText
-              style={{
-                fontSize: 12,
-                color: "black",
-                textTransform: "uppercase",
-              }}
-            >
-              {selectedEndDate}
-            </ThemedText>
-          </TouchableOpacity>
-        </View> */}
-
         <View
           style={{
             flexDirection: "row",
@@ -329,7 +287,7 @@ export default function ReflectionScreen() {
         {isStartHourMenuVisible && (
           <Modal transparent={true} animationType="fade">
             <View style={styles.modalBackground}>
-              <View style={styles.menu}>
+              <ScrollView style={styles.menu}>
                 {Array.from({ length: 24 }, (_, i) => (
                   <TouchableOpacity
                     key={i}
@@ -342,7 +300,7 @@ export default function ReflectionScreen() {
                     <Text style={styles.menuItemText}>{`${i.toString().padStart(2, "0")}:00`}</Text>
                   </TouchableOpacity>
                 ))}
-              </View>
+              </ScrollView>
             </View>
           </Modal>
         )}
@@ -350,7 +308,7 @@ export default function ReflectionScreen() {
         {isEndHourMenuVisible && (
           <Modal transparent={true} animationType="fade">
             <View style={styles.modalBackground}>
-              <View style={styles.menu}>
+              <ScrollView style={styles.menu}>
                 {Array.from({ length: 24 }, (_, i) => (
                   <TouchableOpacity
                     key={i}
@@ -363,7 +321,7 @@ export default function ReflectionScreen() {
                     <Text style={styles.menuItemText}>{`${i.toString().padStart(2, "0")}:30`}</Text>
                   </TouchableOpacity>
                 ))}
-              </View>
+              </ScrollView>
             </View>
           </Modal>
         )}
@@ -462,14 +420,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    height: 500,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   menu: {
+    maxHeight: 300,
     backgroundColor: "white",
     height: 400,
-    borderRadius: 5,
+    borderRadius: 0,
     padding: 10,
-    width: 200,
+    width: 100,
   },
   menuItem: {
     padding: 10,
