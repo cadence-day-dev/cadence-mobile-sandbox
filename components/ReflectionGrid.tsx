@@ -17,12 +17,12 @@ const ScheduleGrid = () => {
   });
 
   const colors = [
-    // "#141F2C",
-    // "#024886",
+    "#141F2C",
+    "#024886",
     "#6D7D8D",
     "#B4C5D6",
     "#E9942F",
-    // "#9D8266",
+    "#9D8266",
     "#A5A1A0",
     "#DAEBFD",
   ];
@@ -50,24 +50,30 @@ const ScheduleGrid = () => {
           {dates.map((date, dateIndex) => (
             <View key={dateIndex} style={styles.column}>
               <Text style={styles.dateHeader}>{date}</Text>
-              {hours.map((hour, hourIndex) => (
-                <TouchableOpacity
-                  key={hourIndex}
-                  style={[
-                    styles.cell,
-                    {
-                      backgroundColor:
-                        colors[Math.floor(Math.random() * colors.length)],
-                    },
-                  ]}
-                  onPress={() => {
-                    setSelectedHour(hour);
-                    setModalVisible(true);
-                  }}
-                >
-                  {/* <Text style={styles.hourText}>{hour}</Text> */}
-                </TouchableOpacity>
-              ))}
+              {hours.map((hour, hourIndex) => {
+                // Calculate a consistent offset for color selection
+                const offset = Math.floor(hourIndex / 2); // Change divisor to 4 for 4-cell blocks
+                const colorIndex = (hourIndex - offset) % colors.length;
+
+                return (
+                  <TouchableOpacity
+                    key={hourIndex}
+                    style={[
+                      styles.cell,
+                      {
+                        backgroundColor: colors[colorIndex],
+                      },
+                    ]}
+                    onPress={() => {
+                      setSelectedHour(hour);
+                      setModalVisible(true);
+                    }}
+                  >
+                    {/* Uncomment if you want to display the hour text */}
+                    {/* <Text style={styles.hourText}>{hour}</Text> */}
+                  </TouchableOpacity>
+                );
+              })}
             </View>
           ))}
         </View>
@@ -132,8 +138,8 @@ const styles = StyleSheet.create({
     height: 18,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#6646EC",
+    // borderWidth: 1,
+    // borderColor: "#6646EC",
     marginBottom: 2,
   },
   hourText: {
