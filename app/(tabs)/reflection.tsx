@@ -11,6 +11,7 @@ import { Svg, Rect, Circle, Line, Path } from "react-native-svg";
 import { useState } from "react";
 import * as Haptics from "expo-haptics";
 import SimpleDialog from "@/components/DialogNote";
+import ChatDialog from "@/components/DialogAi";
 import DialogActivity from "@/components/DialogActivity";
 
 import { ThemedText } from "@/components/ThemedText";
@@ -36,6 +37,8 @@ export default function ReflectionScreen() {
 
   const [isStartHourMenuVisible, setStartHourMenuVisible] = useState(false);
   const [isEndHourMenuVisible, setEndHourMenuVisible] = useState(false);
+
+  const [isDialogVisible, setDialogVisible] = useState(false);
 
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
@@ -90,6 +93,10 @@ export default function ReflectionScreen() {
     setEndHourMenuVisible(!isEndHourMenuVisible);
   };
 
+  const toggleDialogVisibility = () => {
+    setDialogVisible(!isDialogVisible);
+  };
+
   const dates = Array.from({ length: 30 }, (_, i) => {
     const day = String(i + 1).padStart(2, "0");
     return `${day}/11/2024`;
@@ -136,22 +143,26 @@ export default function ReflectionScreen() {
           position: "relative",
         }}
       >
-        <Svg
-          width="22"
-          height="15"
-          viewBox="0 0 22 15"
-          fill="none"
+        <TouchableOpacity
+          onPress={toggleDialogVisibility}
           style={{
             position: "absolute",
             top: 0,
             right: 20,
           }}
         >
-          <Rect x="0.5" y="0.5" width="21" height="14" stroke="black" />
-          <Circle cx="7" cy="7" r="1.5" stroke="black" />
-          <Circle cx="15" cy="7" r="1.5" stroke="black" />
-          <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
-        </Svg>
+          <Svg
+            width="22"
+            height="15"
+            viewBox="0 0 22 15"
+            fill="none"
+          >
+            <Rect x="0.5" y="0.5" width="21" height="14" stroke="black" />
+            <Circle cx="7" cy="7" r="1.5" stroke="black" />
+            <Circle cx="15" cy="7" r="1.5" stroke="black" />
+            <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
+          </Svg>
+        </TouchableOpacity>
         <View
           style={{
             flexDirection: "row",
@@ -410,6 +421,10 @@ export default function ReflectionScreen() {
       <DialogActivity
         visible={isActivityDialogVisible}
         toggleVisibility={toggleActivityDialogVisibility}
+      />
+      <ChatDialog
+        visible={isDialogVisible}
+        toggleVisibility={toggleDialogVisibility}
       />
     </SafeAreaView>
   );

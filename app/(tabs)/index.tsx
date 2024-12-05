@@ -3,6 +3,7 @@ import { Svg, Rect, Circle, Line } from "react-native-svg";
 import { useState } from "react";
 import * as Haptics from "expo-haptics";
 import SimpleDialog from "@/components/DialogNote";
+import DialogChat from "@/components/DialogAi";
 import DialogActivity from "@/components/DialogActivity";
 
 import { ThemedText } from "@/components/ThemedText";
@@ -15,6 +16,8 @@ export default function HomeScreen() {
   );
   const [isNoteDialogVisible, setNoteDialogVisible] = useState(false);
   const [isActivityDialogVisible, setActivityDialogVisible] = useState(false);
+  const [isDialogVisible, setDialogVisible] = useState(false);
+
   const handlePress = (index: number) => {
     setPressedStates((prevStates) => {
       const newStates = [...prevStates];
@@ -43,6 +46,10 @@ export default function HomeScreen() {
     setActivityDialogVisible(!isActivityDialogVisible);
   };
 
+  const toggleDialogVisibility = () => {
+    setDialogVisible(!isDialogVisible);
+  };
+
   const colorLabels = {
     work: "#141F2C",
     sports: "#024886",
@@ -69,22 +76,26 @@ export default function HomeScreen() {
           position: "relative",
         }}
       >
-        <Svg
-          width="22"
-          height="15"
-          viewBox="0 0 22 15"
-          fill="none"
+        <TouchableOpacity
+          onPress={toggleDialogVisibility}
           style={{
             position: "absolute",
             top: 0,
             right: 20,
           }}
         >
-          <Rect x="0.5" y="0.5" width="21" height="14" stroke="black" />
-          <Circle cx="7" cy="7" r="1.5" stroke="black" />
-          <Circle cx="15" cy="7" r="1.5" stroke="black" />
-          <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
-        </Svg>
+          <Svg
+            width="22"
+            height="15"
+            viewBox="0 0 22 15"
+            fill="none"
+          >
+            <Rect x="0.5" y="0.5" width="21" height="14" stroke="black" />
+            <Circle cx="7" cy="7" r="1.5" stroke="black" />
+            <Circle cx="15" cy="7" r="1.5" stroke="black" />
+            <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
+          </Svg>
+        </TouchableOpacity>
         <ThemedText
           style={{
             fontSize: 14,
@@ -312,6 +323,10 @@ export default function HomeScreen() {
       <DialogActivity
         visible={isActivityDialogVisible}
         toggleVisibility={toggleActivityDialogVisibility}
+      />
+      <DialogChat
+        visible={isDialogVisible}
+        toggleVisibility={toggleDialogVisibility}
       />
     </SafeAreaView>
   );
