@@ -1,15 +1,10 @@
 import { Tabs } from "expo-router";
 import React from "react";
 import { Platform } from "react-native";
-
 import { HapticTab } from "@/components/HapticTab";
 import TabBarBackground from "@/components/ui/TabBarBackground";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
@@ -41,7 +36,14 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "TODAY",
+          title: "LOGIN",
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="sandbox"
+        options={{
+          title: "SANDBOX",
           tabBarIcon: () => null,
         }}
       />
@@ -52,13 +54,13 @@ export default function TabLayout() {
           tabBarIcon: () => null,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="play"
         options={{
           title: "PLAY",
           tabBarIcon: () => null,
         }}
-      />
+      /> */}
       {/* <Tabs.Screen
         name="about"
         options={{
@@ -70,6 +72,13 @@ export default function TabLayout() {
         name="account"
         options={{
           title: "ACCOUNT",
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="today"
+        options={{
+          title: "TODAY",
           tabBarIcon: () => null,
         }}
       />

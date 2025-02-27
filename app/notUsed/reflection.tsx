@@ -151,16 +151,18 @@ export default function ReflectionScreen() {
             right: 20,
           }}
         >
-          <Svg
-            width="22"
-            height="15"
-            viewBox="0 0 22 15"
-            fill="none"
-          >
+          <Svg width="22" height="15" viewBox="0 0 22 15" fill="none">
             <Rect x="0.5" y="0.5" width="21" height="14" stroke="black" />
             <Circle cx="7" cy="7" r="1.5" stroke="black" />
             <Circle cx="15" cy="7" r="1.5" stroke="black" />
-            <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
+            <Line
+              x1="7"
+              y1="13"
+              x2="15"
+              y2="13"
+              stroke="black"
+              strokeWidth="2"
+            />
           </Svg>
         </TouchableOpacity>
         <View
@@ -303,12 +305,16 @@ export default function ReflectionScreen() {
                   <TouchableOpacity
                     key={i}
                     onPress={() => {
-                      setSelectedStartHour(`${i.toString().padStart(2, "0")}:00`);
+                      setSelectedStartHour(
+                        `${i.toString().padStart(2, "0")}:00`,
+                      );
                       setStartHourMenuVisible(false);
                     }}
                     style={styles.menuItem}
                   >
-                    <Text style={styles.menuItemText}>{`${i.toString().padStart(2, "0")}:00`}</Text>
+                    <Text
+                      style={styles.menuItemText}
+                    >{`${i.toString().padStart(2, "0")}:00`}</Text>
                   </TouchableOpacity>
                 ))}
               </ScrollView>
@@ -329,7 +335,9 @@ export default function ReflectionScreen() {
                     }}
                     style={styles.menuItem}
                   >
-                    <Text style={styles.menuItemText}>{`${i.toString().padStart(2, "0")}:30`}</Text>
+                    <Text
+                      style={styles.menuItemText}
+                    >{`${i.toString().padStart(2, "0")}:30`}</Text>
                   </TouchableOpacity>
                 ))}
               </ScrollView>
