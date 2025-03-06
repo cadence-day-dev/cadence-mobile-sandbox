@@ -24,7 +24,6 @@ export default function TabLayout() {
             backgroundColor: "white",
             opacity: 1,
             borderTopWidth: 2,
-            borderTopColor: "red",
           },
         }),
         tabBarLabelStyle: {
