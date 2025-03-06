@@ -68,8 +68,8 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ supabase }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 350,
-    width: 254,
+    height: 250,
+    width: 300,
     backgroundColor: "#141F2C",
     padding: 16,
     borderRadius: 8,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   scrollView: {
-    width: 224,
+    width: 280,
     paddingRight: 10,
   },
   activityItem: {

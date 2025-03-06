@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useEffect } from "react";
 import useActivityStore from "../../stores/useActivityStore";
+import useNotesStore from "../../stores/useNotesStore";
 // import useNotesStore from "../stores/useNotesStore";
 // import usePrivateActivityStore from "../../stores/usePrivateActivityStore";
 // import useProfileStore from "../../stores/useProfileStore";
@@ -13,8 +14,8 @@ interface StateModalProps {
 const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
   const setActivities = useActivityStore((state) => state.setActivities);
   const activities = useActivityStore((state) => state.activities);
-  // const setNotes = useNotesStore((state) => state.setNotes);
-  // const notes = useNotesStore((state) => state.notes);
+  const setNotes = useNotesStore((state) => state.setNotes);
+  const notes = useNotesStore((state) => state.notes);
   // const setProfile = useProfileStore((state) => state.setProfile);
   // const profile = useProfileStore((state) => state.profile);
   // const setTimeslices = useTimeslicesStore((state) => state.setTimeslices);
@@ -22,7 +23,7 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
 
   useEffect(() => {
     fetchActivities();
-    // fetchNotes();
+    fetchNotes();
     // fetchProfile();
     // fetchUserTimeSlicesOld();
     // fetchTodayTimeslices();
@@ -59,7 +60,7 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
       console.error("Error fetching notes:", error);
       alert("An error occurred while fetching notes. Please try again.");
     } else {
-      // setNotes(notes);
+      setNotes(notes);
     }
   };
 
@@ -166,6 +167,7 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
 const styles = StyleSheet.create({
   container: {
     height: 80,
+    width: 300,
     backgroundColor: "#141F2C",
     padding: 16,
     borderRadius: 8,
