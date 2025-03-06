@@ -121,13 +121,13 @@ const NotesModal: React.FC<NotesModalProps> = ({ supabase }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 250,
+    height: 300,
     width: 300,
     backgroundColor: "#141F2C",
+    borderColor: "#6646EC",
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#6646EC",
   },
   header: {
     flexDirection: "row",

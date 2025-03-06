@@ -35,49 +35,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "LOGIN",
-          tabBarIcon: () => null,
-        }}
-      />
-      <Tabs.Screen
-        name="sandbox"
-        options={{
-          title: "SANDBOX",
-          tabBarIcon: () => null,
-        }}
-      />
-      <Tabs.Screen
-        name="reflection"
-        options={{
-          title: "REFLECTION",
-          tabBarIcon: () => null,
-        }}
-      />
-      {/* <Tabs.Screen
-        name="play"
-        options={{
-          title: "PLAY",
-          tabBarIcon: () => null,
-        }}
-      /> */}
-      {/* <Tabs.Screen
-        name="about"
-        options={{
-          title: "ABOUT",
-          tabBarIcon: () => null,
-        }}
-      /> */}
-      <Tabs.Screen
-        name="account"
-        options={{
-          title: "ACCOUNT",
-          tabBarIcon: () => null,
-        }}
-      />
-      <Tabs.Screen
-        name="today"
-        options={{
-          title: "TODAY",
+          title: "Cadence SANDBOX",
           tabBarIcon: () => null,
         }}
       />
