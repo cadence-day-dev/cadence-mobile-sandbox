@@ -7,6 +7,7 @@ import useNotesStore from "../../stores/useNotesStore";
 // import usePrivateActivityStore from "../../stores/usePrivateActivityStore";
 // import useProfileStore from "../../stores/useProfileStore";
 // import useTimeslicesStore from "../../stores/useTimeslicesStore";
+import useTimeslicesStore from "@/stores/useTimelineStore";
 
 interface StateModalProps {
   supabase: any;
@@ -18,15 +19,15 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
   const notes = useNotesStore((state) => state.notes);
   // const setProfile = useProfileStore((state) => state.setProfile);
   // const profile = useProfileStore((state) => state.profile);
-  // const setTimeslices = useTimeslicesStore((state) => state.setTimeslices);
-  // const timeslices = useTimeslicesStore((state) => state.timeslices);
+  const setTimeslices = useTimeslicesStore((state) => state.setTimeslices);
+  const timeslices = useTimeslicesStore((state) => state.timeslices);
 
   useEffect(() => {
     fetchActivities();
     fetchNotes();
     // fetchProfile();
     // fetchUserTimeSlicesOld();
-    // fetchTodayTimeslices();
+    fetchTodayTimeslices();
   }, []);
 
   const fetchActivities = async (): Promise<any[] | null> => {
@@ -95,7 +96,7 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
     if (error) {
       console.error("Error fetching timeslices:", error);
     } else {
-      // setTimeslices(fetchedTimeslices || []);
+      setTimeslices(fetchedTimeslices || []);
     }
   };
 
@@ -121,7 +122,7 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
         "An error occurred while fetching new timeslices. Please try again.",
       );
     } else {
-      // setTimeslices(data.data || []);
+      setTimeslices(data.data || []);
     }
   };
 
@@ -137,27 +138,27 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>State container status</Text>
-        <View style={styles.statusContainer}>
+        <View style={[styles.statusContainer, { flexDirection: "column" }]}>
           {activities.length > 0 ? (
             <Text style={styles.success}>Activities Fetched</Text>
           ) : (
             <Text style={styles.error}>Activities not fetched</Text>
           )}
-          {/* {notes.length > 0 ? (
+          {notes.length > 0 ? (
             <Text style={styles.success}>Notes Fetched</Text>
           ) : (
             <Text style={styles.error}>Notes not fetched</Text>
           )}
-          {profile.email ? (
+          {/* {profile.email ? (
             <Text style={styles.success}>Profile Fetched</Text>
           ) : (
             <Text style={styles.error}>Profile not fetched</Text>
-          )}
+          )} */}
           {timeslices.length > 0 ? (
             <Text style={styles.success}>Timeslices Fetched</Text>
           ) : (
             <Text style={styles.error}>Timeslices not fetched</Text>
-          )} */}
+          )}
         </View>
       </View>
     </View>
@@ -166,10 +167,9 @@ const StateModal: React.FC<StateModalProps> = ({ supabase }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
-    width: 300,
+    width: 320,
     backgroundColor: "#141F2C",
-    padding: 16,
+    padding: 10,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#6646EC",
