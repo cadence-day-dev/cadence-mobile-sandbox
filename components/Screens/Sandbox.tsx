@@ -10,7 +10,7 @@ import Accordion from "@/components/Accordian";
 
 export default function SandboxScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#B7B7B7" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#D9D9D9" }}>
       <View
         style={{
           flex: 0.3,

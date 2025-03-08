@@ -16,9 +16,9 @@ export default function TabLayout() {
         tabBarStyle: Platform.select({
           ios: {
             position: "absolute",
-            backgroundColor: "white",
+            backgroundColor: "green",
             borderTopWidth: 1,
-            borderTopColor: "#ADADAD",
+            borderTopColor: "white",
           },
           default: {
             backgroundColor: "white",
@@ -33,9 +33,30 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
+        name="today"
+        options={{
+          title: "TODAY",
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="reflection"
+        options={{
+          title: "REFLECTION",
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: "ACCOUNT",
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
         name="index"
         options={{
-          title: "Cadence SANDBOX",
+          title: "SANDBOX",
           tabBarIcon: () => null,
         }}
       />

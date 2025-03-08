@@ -10,7 +10,7 @@ export default function BlurTabBarBackground() {
       intensity={0} // Adjust intensity for the blur effect
       style={[
         StyleSheet.absoluteFill,
-        { backgroundColor: "rgba(183, 183, 183, 4)" },
+        { backgroundColor: "rgba(217, 217, 217, 1)" },
       ]}
     />
   );

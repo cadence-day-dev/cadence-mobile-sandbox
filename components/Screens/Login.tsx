@@ -40,6 +40,7 @@ const LoginComponent: React.FC = () => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#A5A1A0"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -48,26 +49,51 @@ const LoginComponent: React.FC = () => {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#A5A1A0"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         autoCapitalize="none"
       />
-      <TouchableOpacity onPress={handleLogin}>
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: 11,
-            borderWidth: 1,
-            borderColor: "#6646EC",
-            color: "#FFF4A0",
-            padding: 5,
-            backgroundColor: "#024886",
-          }}
-        >
-          LOGIN
-        </Text>
-      </TouchableOpacity>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 24,
+        }}
+      >
+        <TouchableOpacity onPress={handleLogin}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              borderWidth: 1,
+              borderColor: "#FFFFFF",
+              width: 140,
+              color: "#FFFFFF",
+              padding: 10,
+              marginRight: 10,
+            }}
+          >
+            Sign Up
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleLogin}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              borderWidth: 1,
+              borderColor: "#FFFFFF",
+              color: "#FFFFFF",
+              padding: 10,
+              width: 140,
+            }}
+          >
+            Sign in
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -77,16 +103,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 16,
-    backgroundColor: "#727272",
+    backgroundColor: "#151414",
   },
   input: {
     height: 40,
-    borderColor: "#6646EC",
-    color: "#FFF4A0",
-    borderWidth: 1,
+    borderColor: "#FFFFFF",
+    color: "#FFFFFF",
+    borderBottomWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,
-    fontSize: 11,
+    fontSize: 14,
   },
   error: {
     fontSize: 11,

@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 
 const ScheduleGrid = () => {
   const dates = Array.from({ length: 30 }, (_, i) => {
@@ -10,21 +17,22 @@ const ScheduleGrid = () => {
   });
 
   // Generate time in 30-minute increments from 9:00 to 18:30
-  const hours = Array.from({ length: 18 }, (_, i) => {
+  const hours = Array.from({ length: 40 }, (_, i) => {
     const hour = Math.floor(i / 2) + 9;
     const minutes = i % 2 === 0 ? "00" : "30";
     return `${hour}:${minutes}`;
   });
 
   const colors = [
-    "#141F2C",
-    "#024886",
-    "#6D7D8D",
-    "#B4C5D6",
-    "#E9942F",
-    "#9D8266",
-    "#A5A1A0",
-    "#DAEBFD",
+    // "#141F2C",
+    // "#024886",
+    "transparent",
+    // "#6D7D8D",
+    // "#B4C5D6",
+    // "#E9942F",
+    // "#9D8266",
+    // "#A5A1A0",
+    // "#DAEBFD",
   ];
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -32,7 +40,7 @@ const ScheduleGrid = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   return (
-    <ScrollView horizontal>
+    <ScrollView horizontal style={{ backgroundColor: "#D9D9D9" }}>
       <View style={styles.container}>
         <View style={styles.hourColumn}>
           {hours.map((hour, index) => (
@@ -61,6 +69,8 @@ const ScheduleGrid = () => {
                     style={[
                       styles.cell,
                       {
+                        borderWidth: 0.5,
+                        borderColor: "#6646EC",
                         backgroundColor: colors[colorIndex],
                       },
                     ]}
@@ -87,9 +97,6 @@ const ScheduleGrid = () => {
       >
         <View style={styles.modalBackground}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>
-              {selectedDate ? `${selectedDate}  -  ${selectedHour}` : "No hour selected"}
-            </Text>
             <TouchableOpacity
               onPress={() => setModalVisible(false)}
               style={styles.closeButton}
@@ -135,7 +142,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   cell: {
-    width: 70,
+    width: 50,
     height: 18,
     justifyContent: "center",
     alignItems: "center",
@@ -160,10 +167,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 0,
     alignItems: "center",
-  },
-  modalText: {
-    fontSize: 10,
-    marginBottom: 20,
   },
   closeButton: {
     padding: 10,
