@@ -9,35 +9,23 @@ import {
 } from "react-native";
 
 const ScheduleGrid = () => {
-  const dates = Array.from({ length: 30 }, (_, i) => {
+  const dates = Array.from({ length: 7 }, (_, i) => {
     const date = new Date();
     date.setDate(1);
     date.setDate(date.getDate() + i);
     return `${date.getDate()}/${date.getMonth() + 1}`;
   });
 
-  // Generate time in 30-minute increments from 9:00 to 18:30
-  const hours = Array.from({ length: 40 }, (_, i) => {
+  const hours = Array.from({ length: 30 }, (_, i) => {
     const hour = Math.floor(i / 2) + 9;
-    const minutes = i % 2 === 0 ? "00" : "30";
-    return `${hour}:${minutes}`;
+    return `${hour}`;
   });
 
-  const colors = [
-    // "#141F2C",
-    // "#024886",
-    "transparent",
-    // "#6D7D8D",
-    // "#B4C5D6",
-    // "#E9942F",
-    // "#9D8266",
-    // "#A5A1A0",
-    // "#DAEBFD",
-  ];
+  const colors = ["transparent"];
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedHour, setSelectedHour] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [, setSelectedHour] = useState<string | null>(null);
+  const [, setSelectedDate] = useState<string | null>(null);
 
   return (
     <ScrollView horizontal style={{ backgroundColor: "#D9D9D9" }}>
@@ -62,7 +50,6 @@ const ScheduleGrid = () => {
               {hours.map((hour, hourIndex) => {
                 const offset = Math.floor(hourIndex / 4);
                 const colorIndex = (hourIndex - offset) % colors.length;
-
                 return (
                   <TouchableOpacity
                     key={hourIndex}
@@ -79,10 +66,7 @@ const ScheduleGrid = () => {
                       setSelectedDate(date);
                       setModalVisible(true);
                     }}
-                  >
-                    {/* Uncomment if you want to display the hour text */}
-                    {/* <Text style={styles.hourText}>{hour}</Text> */}
-                  </TouchableOpacity>
+                  />
                 );
               })}
             </View>
@@ -115,7 +99,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   hourColumn: {
-    marginRight: 0,
+    width: 24,
+    marginRight: 4,
     marginTop: 27,
   },
   hourCell: {
@@ -129,10 +114,6 @@ const styles = StyleSheet.create({
   },
   grid: {
     flexDirection: "row",
-    marginLeft: 6,
-  },
-  column: {
-    marginHorizontal: 1,
   },
   dateHeader: {
     fontSize: 9,
@@ -142,18 +123,15 @@ const styles = StyleSheet.create({
     color: "black",
   },
   cell: {
-    width: 50,
+    width: 51,
     height: 18,
     justifyContent: "center",
     alignItems: "center",
-    // borderWidth: 1,
-    // borderColor: "#6646EC",
     marginBottom: 2,
   },
   hourText: {
-    fontSize: 8,
+    fontSize: 10,
     color: "black",
-    marginLeft: 6,
   },
   modalBackground: {
     flex: 1,

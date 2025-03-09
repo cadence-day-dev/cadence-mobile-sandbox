@@ -1,309 +1,82 @@
-import { SafeAreaView, View, ScrollView, TouchableOpacity, Image } from "react-native";
-import { Svg, Rect, Circle, Line } from "react-native-svg";
-import { useState } from "react";
-import * as Haptics from "expo-haptics";
-
+import { SafeAreaView, View, Image } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
+import Avatar from "@/components/ui/Avatar";
+
+interface LineItemProps {
+  title: any;
+  value: any;
+}
+
+const LineItem: React.FC<LineItemProps> = ({ title, value }) => {
+  return (
+    <View
+      style={{
+        width: "90%",
+        height: "12%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        position: "relative",
+        borderBottomWidth: 0.5,
+        borderColor: "#6646EC",
+        marginBottom: 18,
+      }}
+    >
+      <ThemedText style={{ fontSize: 14, color: "#575453" }}>
+        {title}
+      </ThemedText>
+      <ThemedText style={{ fontSize: 14, color: "black" }}>{value}</ThemedText>
+    </View>
+  );
+};
 
 export default function AccountScreen() {
-  const [pressedStates, setPressedStates] = useState(Array(48).fill(false));
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const [sliceColors, setSliceColors] = useState<string[]>(
-    Array(48).fill("transparent"),
-  );
-
-  const handlePress = (index: number) => {
-    setPressedStates((prevStates) => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
-    });
-
-    setSliceColors((prevColors) => {
-      const newColors = [...prevColors];
-      newColors[index] = selectedColor || "#E9942F";
-      return newColors;
-    });
-
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+  const sections = {
+    Name: "Andrea Lausevic",
+    Username: "@anjicabananica",
+    Password: "********",
+    Phone_number: "+13473244776",
+    Email: "Andrea Lausevic",
+    Notifications: ">",
+    Subscription_plan: "Free >",
+    // Two_factor_authentication: "Enabled >",
   };
-
-  const handleColorPress = (color: string) => {
-    setSelectedColor(color);
-  };
-
-  const colorLabels = {
-    work: "#141F2C",
-    sports: "#024886",
-    study: "#6D7D8D",
-    family: "#B4C5D6",
-    food: "#E9942F",
-    friends: "#9D8266",
-    grocery: "#A5A1A0",
-    rest: "#DAEBFD",
-    clear: "transparent",
-  };
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#B7B7B7" }}>
-      {/* First Box - 20% height */}
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#D9D9D9" }}>
+      <Avatar />
       <View
         style={{
+          top: 60,
           width: "100%",
-          height: "5%",
-          marginVertical: 10,
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          paddingLeft: 20,
-          position: "relative",
-        }}
-      >
-        <Svg
-          width="22"
-          height="15"
-          viewBox="0 0 22 15"
-          fill="none"
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 20,
-          }}
-        >
-          <Rect x="0.5" y="0.5" width="21" height="14" stroke="black" />
-          <Circle cx="7" cy="7" r="1.5" stroke="black" />
-          <Circle cx="15" cy="7" r="1.5" stroke="black" />
-          <Line x1="7" y1="13" x2="15" y2="13" stroke="black" strokeWidth="2" />
-        </Svg>
-        <ThemedText
-          style={{
-            fontSize: 14,
-            color: "black",
-            marginBottom: 2,
-            marginBottom: 2,
-            marginTop: -8,
-          }}
-        >
-          Account
-        </ThemedText>
-      </View>
-      {/* Second Box - 50% height */}
-      <View
-        style={{
-          width: "95%",
-          height: "30%",
-          backgroundColor: "#C4C4C4",
-          marginVertical: 10,
+          flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 5,
-          alignSelf: "center",
         }}
       >
-        <Image
-          source={require("@/assets/images/Andrea.png")}
-          style={{
-            position: "absolute",
-            top: 56,
-            width: 80,
-            height: 80,
-            borderRadius: 25,
-          }}
-        />
-        <ThemedText
-          style={{
-            position: "absolute",
-            top: 150,
-            fontSize: 14,
-            color: "black",
-            textAlign: "center",
-          }}
-        >
-          Andrea Lausevic
-        </ThemedText>
-        <ThemedText
-          style={{
-            position: "absolute",
-            top: 170,
-            fontSize: 10,
-            color: "black",
-            textAlign: "center",
-          }}
-        >
-          andrea.lausevic@gmail.com
-        </ThemedText>
-      </View>
-
-      {/* Third Box - 20% height */}
-      <View
-        style={{
-          width: "95%",
-          height: "24%",
-          backgroundColor: "#C4C4C4",
-          marginVertical: 10,
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 5,
-          alignSelf: "center",
-        }}
-      >
-        {/* New Inner Box */}
+        {Object.entries(sections).map(([title, value]) => {
+          return <LineItem title={title} value={value} />;
+        })}
         <View
           style={{
             width: "90%",
-            height: "20%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-            position: "relative",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
           }}
         >
-          <ThemedText style={{ fontSize: 10, color: "black" }}>Points</ThemedText>
-          <View
+          <ThemedText
             style={{
-              position: "absolute",
-              top: "50%",
-              left: "20%",
-              right: "12%",
-              height: 1,
-              backgroundColor: "black",
-              borderStyle: "dotted",
+              fontSize: 11,
+              marginTop: 20,
+              color: "#575453",
+              alignSelf: "flex-start",
+              letterSpacing: 2,
             }}
-          />
-          <ThemedText style={{ fontSize: 10, color: "black" }}>30</ThemedText>
-        </View>
-        <View
-          style={{
-            width: "90%",
-            height: "20%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-            position: "relative",
-          }}
-        >
-          <ThemedText style={{ fontSize: 10, color: "black" }}>
-            Timeslots
+          >
+            SECURITY
           </ThemedText>
-          <View
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "24%",
-              right: "12%",
-              height: 1,
-              backgroundColor: "black",
-              borderStyle: "dotted",
-            }}
-          />
-          <ThemedText style={{ fontSize: 10, color: "black" }}>30</ThemedText>
         </View>
-        <View
-          style={{
-            width: "90%",
-            height: "20%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-            position: "relative",
-          }}
-        >
-          <ThemedText style={{ fontSize: 10, color: "black" }}>
-            Notes
-          </ThemedText>
-          <View
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "20%",
-              right: "12%",
-              height: 1,
-              backgroundColor: "black",
-              borderStyle: "dotted",
-            }}
-          />
-          <ThemedText style={{ fontSize: 10, color: "black" }}>30</ThemedText>
-        </View>
-      </View>
-      {/* Third Box - 20% height */}
-      <View
-        style={{
-          width: "95%",
-          height: "24%",
-          backgroundColor: "#C4C4C4",
-          marginVertical: 10,
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 5,
-          alignSelf: "center",
-        }}
-      >
-        <View
-          style={{
-            width: "90%",
-            height: "20%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-            position: "relative",
-          }}
-        >
-          <ThemedText style={{ fontSize: 10, color: "black" }}>
-            Option 1
-          </ThemedText>
-          <ThemedText style={{ fontSize: 10, color: "black" }}> > </ThemedText>
-        </View>
-        <View
-          style={{
-            width: "90%",
-            height: "20%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-            position: "relative",
-          }}
-        >
-          <ThemedText style={{ fontSize: 10, color: "black" }}>
-            Option 2
-          </ThemedText>
-          <ThemedText style={{ fontSize: 10, color: "black" }}> > </ThemedText>
-        </View>
-        <View
-          style={{
-            width: "90%",
-            height: "20%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-            position: "relative",
-          }}
-        >
-          <ThemedText style={{ fontSize: 10, color: "black" }}>
-            Find friends
-          </ThemedText>
-          <ThemedText style={{ fontSize: 10, color: "black" }}> > </ThemedText>
-        </View>
-        <View
-          style={{
-            width: "90%",
-            height: "20%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 10,
-            position: "relative",
-          }}
-        >
-          <ThemedText style={{ fontSize: 10, color: "black" }}>
-            Log out
-          </ThemedText>
-          <ThemedText style={{ fontSize: 10, color: "black" }}> > </ThemedText>
-        </View>
+        <LineItem title={"Two factor authentication"} value={"Enabled >"} />
       </View>
     </SafeAreaView>
   );

@@ -18,8 +18,8 @@ const Header: React.FC<HeaderProps> = ({ title, subTitle }) => {
         marginTop: 20,
         justifyContent: "center",
         alignItems: "flex-start",
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 24,
+        paddingRight: 10,
         position: "relative",
       }}
     >
