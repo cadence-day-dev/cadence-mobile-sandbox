@@ -6,7 +6,7 @@ import ActivityContainer from "@/components/ui/ActivityContainer";
 export default function HomeScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#D9D9D9" }}>
-      <Header title={"Pattern of your Day"} subTitle={"12/11/24 at 13:15"} />
+      <Header title={"Day"} subTitle={"12/11/24 at 13:15"} />
       <Timeline />
       <ActivityContainer />
     </SafeAreaView>

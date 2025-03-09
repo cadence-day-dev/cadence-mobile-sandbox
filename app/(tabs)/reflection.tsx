@@ -6,16 +6,13 @@ export default function ReflectionScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#D9D9D9" }}>
       {/* First Box - 20% height */}
-      <Header
-        title={"Pattern of your Week"}
-        subTitle={"02/11/24 to 08/11/24"}
-      />
+      <Header title={"Week"} subTitle={"02/11/24 to 08/11/24"} />
       {/* Second Box - 50% height */}
       <View
         style={{
           width: "100%",
           height: "80%",
-          marginVertical: 10,
+          marginVertical: 0,
           justifyContent: "center",
           alignItems: "center",
           paddingVertical: 0,

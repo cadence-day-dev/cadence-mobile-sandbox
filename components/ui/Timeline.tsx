@@ -67,8 +67,8 @@ const Timeline = () => {
                   onPress={() => handlePress(index)}
                   activeOpacity={1}
                   style={{
-                    width: 40,
-                    height: "90%",
+                    width: 45,
+                    height: 440,
                     borderWidth: 1,
                     borderColor: "#6646EC",
                     marginHorizontal: 2,
