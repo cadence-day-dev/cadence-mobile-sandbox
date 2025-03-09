@@ -29,7 +29,7 @@ const Avatar = () => {
       <ThemedText
         style={{
           position: "absolute",
-          top: 150,
+          top: 160,
           fontSize: 11,
           color: "#575453",
           textAlign: "center",
@@ -39,6 +39,17 @@ const Avatar = () => {
       >
         Edit profile photo
       </ThemedText>
+      <View
+        style={{
+          top: 16,
+          width: 100,
+          height: 100,
+          borderRadius: 50,
+          borderWidth: 1,
+          borderColor: "#6646EC",
+          backgroundColor: "",
+        }}
+      />
     </View>
   );
 };

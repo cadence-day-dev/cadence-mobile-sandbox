@@ -1,4 +1,4 @@
-import { SafeAreaView, View, Image } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import Avatar from "@/components/ui/Avatar";
 
