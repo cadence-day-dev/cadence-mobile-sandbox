@@ -2,6 +2,7 @@
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { ThemedText } from "@/components/ThemedText";
+import Svg, { Rect, Line } from "react-native-svg";
 
 const Timeline = () => {
   const [, setPressedStates] = useState(Array(48).fill(false));
@@ -77,6 +78,57 @@ const Timeline = () => {
                     paddingVertical: 0,
                   }}
                 />
+                <TouchableOpacity
+                  style={{
+                    width: 40,
+                    height: 40,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "absolute",
+                    bottom: 4,
+                  }}
+                >
+                  <Svg
+                    width="14"
+                    height="17"
+                    viewBox="0 0 14 17"
+                    fill="none"
+                    style={{
+                      position: "absolute",
+                      bottom: 10,
+                      opacity: index % 6 === 0 ? 1 : 0.5, // Change opacity based on index
+                    }}
+                  >
+                    <Rect
+                      x="0.5"
+                      y="0.5"
+                      width="13.0076"
+                      height="16"
+                      stroke="black"
+                    />
+                    <Line
+                      x1="2.35742"
+                      y1="4.39453"
+                      x2="11.7883"
+                      y2="4.39453"
+                      stroke="black"
+                    />
+                    <Line
+                      x1="2.35742"
+                      y1="8.77344"
+                      x2="11.7883"
+                      y2="8.77344"
+                      stroke="black"
+                    />
+                    <Line
+                      x1="2.35742"
+                      y1="12.8945"
+                      x2="11.7883"
+                      y2="12.8945"
+                      stroke="black"
+                    />
+                  </Svg>
+                </TouchableOpacity>
               </View>
             </>
           );

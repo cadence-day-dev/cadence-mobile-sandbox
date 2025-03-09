@@ -11,52 +11,69 @@ const ActivityContainer = () => {
   const toggleActivityDialogVisibility = () => {
     setActivityDialogVisible(!isActivityDialogVisible);
   };
-  const colorLabels = {
-    work: "#141F2C",
+  const colorLabels1 = {
+    work: "#E9942F",
     sports: "#024886",
-    study: "#6D7D8D",
-    family: "#B4C5D6",
-    food: "#E9942F",
+    family: "#8AB3DB",
+    admin: "#FFF4A0",
+  };
+  const colorLabels2 = {
+    food: "#758A61",
     friends: "#9D8266",
-    grocery: "#A5A1A0",
+    errands: "#141F2C",
+    rest: "#DAEBFD",
   };
   return (
     <View
       style={{
-        width: "95%",
+        width: "100%",
         height: "24%",
         marginVertical: 2,
-        alignItems: "flex-start",
-        paddingLeft: 10,
+        paddingLeft: 12,
+        paddingRight: 12,
         borderRadius: 5,
         alignSelf: "center",
       }}
     >
-      <View style={{ flexDirection: "row", marginTop: 12 }}>
-        <ThemedText style={{ fontSize: 15, color: "black" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: 12,
+          justifyContent: "space-between",
+        }}
+      >
+        <ThemedText style={{ fontSize: 17, color: "black" }}>
           Activities
         </ThemedText>
         <TouchableOpacity onPress={toggleActivityDialogVisibility}>
           <ThemedText
             style={{
-              fontSize: 10,
+              fontSize: 12,
               color: "black",
               textDecorationLine: "underline",
               marginLeft: 20,
             }}
           >
-            Edit
+            edit
           </ThemedText>
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
-        {Object.entries(colorLabels).map(([label, color], index) => (
-          <View key={index} style={{ alignItems: "center", marginRight: 10 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          marginTop: 16,
+          justifyContent: "space-between",
+        }}
+      >
+        {Object.entries(colorLabels1).map(([label, color], index) => (
+          <View key={color} style={{ alignItems: "center" }}>
             <TouchableOpacity
               onPress={() => handleColorPress(color)}
+              key={label}
               style={{
-                width: 80,
-                height: 32,
+                width: 70,
+                height: 30,
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: color,
@@ -64,13 +81,11 @@ const ActivityContainer = () => {
             />
             <ThemedText
               style={{
-                fontSize: 9,
+                fontSize: 12,
                 color: "black",
                 textAlign: "left",
-                width: 60,
-                marginTop: -2,
-                marginBottom: 5,
-                marginLeft: 0,
+                width: 70,
+                marginBottom: 10,
                 textTransform: "capitalize",
               }}
             >
@@ -78,21 +93,41 @@ const ActivityContainer = () => {
             </ThemedText>
           </View>
         ))}
-        <View
-          style={{
-            width: 80,
-            height: 32,
-            borderWidth: 1,
-            borderColor: "#A1A1A1",
-            justifyContent: "center",
-            alignItems: "center",
-            marginRight: 10,
-            marginBottom: 10,
-            backgroundColor: "transparent",
-          }}
-        >
-          <ThemedText style={{ fontSize: 16, color: "black" }}>+</ThemedText>
-        </View>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
+        {Object.entries(colorLabels2).map(([label, color], index) => (
+          <View style={{ alignItems: "center" }} key={label}>
+            <TouchableOpacity
+              onPress={() => handleColorPress(color)}
+              key={label}
+              style={{
+                width: 70,
+                height: 30,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: color,
+              }}
+            />
+            <ThemedText
+              style={{
+                fontSize: 12,
+                color: "black",
+                textAlign: "left",
+                width: 70,
+                marginBottom: 10,
+                textTransform: "capitalize",
+              }}
+            >
+              {label}
+            </ThemedText>
+          </View>
+        ))}
       </View>
     </View>
   );
