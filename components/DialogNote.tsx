@@ -4,12 +4,12 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { ThemedText } from "@/components/ThemedText";
 
 interface SimpleDialogProps {
   visible: boolean;
@@ -33,17 +33,63 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
           >
             <Text style={styles.closeButtonText}>X</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>Add a note</Text>
+
+          <View
+            style={{
+              width: "95%",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              borderBottomWidth: 0.5,
+              borderColor: "#FFFFFF",
+              marginBottom: 30,
+              marginTop: 12,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 17,
+                color: "white",
+                marginBottom: 13,
+              }}
+            >
+              Add a note
+            </Text>
+          </View>
           <TextInput
             style={styles.input}
             placeholder="Type the note here..."
             multiline
           />
+          <TouchableOpacity
+            onPress={toggleVisibility}
+            style={{
+              width: "95%",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: 40,
+            }}
+          >
+            <ThemedText
+              style={{
+                width: "30%",
+                color: "#FFFF",
+                fontSize: 16,
+                textAlign: "center",
+                borderBottomWidth: 0.5,
+                borderColor: "#FFFF",
+              }}
+            >
+              Save a note
+            </ThemedText>
+          </TouchableOpacity>
+
           <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>What's your energy level</Text>
+            <Text style={styles.subtitle}>What's your energy level? </Text>
           </View>
           <View style={styles.energyLevels}>
-            {["#FF4C4C", "#FF6666", "#FF8080", "#FF9999"].map(
+            {["#FFFFFF", "#FFFFFF", "#727272", "#727272", "#727272"].map(
               (color, index) => (
                 <TouchableOpacity
                   key={index}
@@ -55,8 +101,28 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
               ),
             )}
           </View>
-          <TouchableOpacity onPress={toggleVisibility}>
-            <Text style={styles.saveButton}>Save</Text>
+          <TouchableOpacity
+            onPress={toggleVisibility}
+            style={{
+              width: "95%",
+              height: 40,
+              borderWidth: 0.8,
+              borderColor: "#FFFF",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ThemedText
+              style={{
+                width: "100%",
+                color: "#FFFF",
+                fontSize: 16,
+                textAlign: "center",
+              }}
+            >
+              Done
+            </ThemedText>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -72,62 +138,54 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   dialog: {
-    width: 300,
+    width: "90%",
     padding: 20,
-    backgroundColor: "#333",
+    backgroundColor: "#151414",
     borderRadius: 10,
     alignItems: "center",
     position: "relative",
   },
   closeButton: {
     position: "absolute",
-    top: 10,
-    right: 10,
+    top: 30,
+    right: 26,
     padding: 5,
   },
   closeButtonText: {
     color: "white",
     fontSize: 12,
   },
-  title: {
-    fontSize: 12,
-    color: "white",
-    marginBottom: 20,
-    marginTop: 12,
-  },
   input: {
-    width: "85%",
-    height: 230,
+    width: "95%",
+    height: 360,
     borderColor: "white",
-    borderWidth: 1,
-    color: "white",
+    borderWidth: 0.5,
+    padding: 20,
+    color: "#727272",
     fontSize: 12,
-    marginBottom: 20,
-    padding: 14,
+    marginBottom: 10,
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 14,
     color: "white",
-    marginBottom: 10,
+    marginBottom: 20,
     marginTop: 4,
     alignSelf: "flex-start",
   },
   energyLevels: {
-    width: "85%",
-    marginBottom: 20,
+    width: "95%",
+    marginBottom: 40,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   energyBar: {
-    height: 20,
+    height: 40,
+    width: 40,
     marginBottom: 5,
   },
-  saveButton: {
-    color: "white",
-    fontSize: 12,
-    textDecorationLine: "underline",
-    marginBottom: 10,
-  },
   subtitleContainer: {
-    width: "85%",
+    width: "95%",
     alignItems: "flex-start",
   },
 });

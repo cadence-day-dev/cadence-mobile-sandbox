@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Dimensions, PanResponder, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  PanResponder,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 const { width, height } = Dimensions.get("window");
 const ballRadius = 8;
@@ -25,16 +32,22 @@ const brickColors = [
 ];
 
 const PlayScreen = () => {
-  const [ballPosition, setBallPosition] = useState({ x: width / 2, y: height / 2 });
+  const [ballPosition, setBallPosition] = useState({
+    x: width / 2,
+    y: height / 2,
+  });
   const [ballDirection, setBallDirection] = useState({ dx: 2, dy: -2 });
-  const [paddlePosition, setPaddlePosition] = useState(width / 2 - paddleWidth / 2);
+  const [paddlePosition, setPaddlePosition] = useState(
+    width / 2 - paddleWidth / 2,
+  );
   const [bricks, setBricks] = useState([]);
   const [gameRunning, setGameRunning] = useState(false);
 
   const initializeBricks = () => {
     return Array.from({ length: brickRowCount }, (_, row) =>
       Array.from({ length: brickColumnCount }, (_, col) => {
-        const color = brickColors[Math.floor(Math.random() * brickColors.length)];
+        const color =
+          brickColors[Math.floor(Math.random() * brickColors.length)];
         const hitCount = color === "#E9942F" ? 2 : 1; // Yellow bricks require 2 hits
         return {
           x: col * (brickWidth + brickGap),
@@ -43,7 +56,7 @@ const PlayScreen = () => {
           color,
           hitCount,
         };
-      })
+      }),
     );
   };
 
@@ -54,7 +67,12 @@ const PlayScreen = () => {
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, gestureState) => {
-      setPaddlePosition(Math.max(0, Math.min(width - paddleWidth, gestureState.moveX - paddleWidth / 2)));
+      setPaddlePosition(
+        Math.max(
+          0,
+          Math.min(width - paddleWidth, gestureState.moveX - paddleWidth / 2),
+        ),
+      );
     },
   });
 
@@ -103,7 +121,7 @@ const PlayScreen = () => {
               }
             }
             return brick;
-          })
+          }),
         );
         setBricks(newBricks);
 
@@ -129,21 +147,21 @@ const PlayScreen = () => {
     <View style={styles.container} {...panResponder.panHandlers}>
       <View style={styles.startButtonContainer}>
         <TouchableOpacity onPress={toggleGame} style={styles.startButton}>
-          <Text style={styles.startButtonText}>{gameRunning ? "STOP" : "START"}</Text>
+          <Text style={styles.startButtonText}>
+            {gameRunning ? "STOP" : "START"}
+          </Text>
         </TouchableOpacity>
       </View>
       <View
         style={[
           styles.ball,
-          { left: ballPosition.x - ballRadius, top: ballPosition.y - ballRadius },
+          {
+            left: ballPosition.x - ballRadius,
+            top: ballPosition.y - ballRadius,
+          },
         ]}
       />
-      <View
-        style={[
-          styles.paddle,
-          { left: paddlePosition, bottom: 300 },
-        ]}
-      />
+      <View style={[styles.paddle, { left: paddlePosition, bottom: 300 }]} />
       {bricks.map((row, rowIndex) =>
         row.map(
           (brick, colIndex) =>
@@ -155,8 +173,8 @@ const PlayScreen = () => {
                   { left: brick.x, top: brick.y, backgroundColor: brick.color },
                 ]}
               />
-            )
-        )
+            ),
+        ),
       )}
     </View>
   );
