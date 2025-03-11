@@ -39,27 +39,27 @@ export default function TabLayout() {
           tabBarIcon: () => null,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="reflection"
         options={{
           title: "REFLECTION",
           tabBarIcon: () => null,
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="account"
         options={{
           title: "ACCOUNT",
           tabBarIcon: () => null,
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="sandbox"
         options={{
           title: "SANDBOX",
           tabBarIcon: () => null,
         }}
-      />
+      /> */}
     </Tabs>
   );
 }
